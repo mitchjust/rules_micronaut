@@ -1,0 +1,37 @@
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_full_jar_deps", "micronaut_library")
+
+micronaut_library(
+    name = "data-hibernate-reactive",
+    srcs = glob(
+        ["src/main/java/**/*.java"],
+        exclude = ["src/main/java/com/example/hibernatereactive/GeneratedTypes.java"],
+    ),
+    deps = [
+        # This repository explicitly uses ReactorCrudRepository and Mono.
+        "@maven//:io_projectreactor_reactor_core",
+        "@micronaut//:data_hibernate_reactive",
+    ],
+)
+
+# Compile a separate consumer so missing processor output fails the build. It
+# names generated implementation classes, which only the full jar contains.
+micronaut_full_jar_deps(
+    name = "full",
+    deps = [":data-hibernate-reactive"],
+)
+
+micronaut_library(
+    name = "generated-code",
+    srcs = ["src/main/java/com/example/hibernatereactive/GeneratedTypes.java"],
+    deps = [
+        ":full",
+        "@micronaut//:data_hibernate_reactive",
+    ],
+)
+
+build_test(
+    name = "tests",
+    targets = [":generated-code"],
+    visibility = ["//features:__pkg__"],
+)

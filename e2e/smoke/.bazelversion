@@ -1,0 +1,2 @@
+9.3.2
+# The first line is used by Bazelisk. CI also tests the 8.x series; see .github/workflows/ci.yaml.

@@ -1,0 +1,5 @@
+# Applied on top of application.yml in the `test` environment, which
+# @MicronautTest activates.
+greeting:
+  salutation: Howdy
+  repeat: 2

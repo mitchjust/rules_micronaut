@@ -1,0 +1,27 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "openapi-adoc",
+    srcs = glob(["src/main/java/**/*.java"]),
+    javacopts = ["-Amicronaut.openapi.adoc.enabled=true"],
+    deps = [
+        "@micronaut//:http",
+        "@micronaut//:openapi_adoc",
+    ],
+)
+
+micronaut_test(
+    name = "OpenApiAdocTest",
+    srcs = ["src/test/java/com/example/openapiadoc/OpenApiAdocTest.java"],
+    runtime = "none",
+    deps = [
+        ":openapi-adoc",
+        "@micronaut//:openapi_adoc",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":OpenApiAdocTest"],
+    visibility = ["//features:__pkg__"],
+)

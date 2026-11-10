@@ -1,0 +1,75 @@
+load("@rules_java//java:java_library.bzl", "java_library")
+load("@rules_java//java:java_plugin.bzl", "java_plugin")
+load("@rules_micronaut//micronaut:defs.bzl", "MICRONAUT_JAVACOPTS", "micronaut_application", "micronaut_library", "micronaut_test")
+
+alias(
+    name = "serde_alias",
+    actual = "@micronaut//:serialization",
+)
+
+# User-owned bundles and aliases must preserve exported processors.
+java_library(
+    name = "serde_bundle",
+    exports = [":serde_alias"],
+)
+
+micronaut_library(
+    name = "serialization-jackson",
+    srcs = ["src/main/java/com/example/serde/SelectedMessage.java"],
+    deps = [":serde_bundle"],
+)
+
+# Plain Java rules need only a feature and MICRONAUT_JAVACOPTS.
+java_library(
+    name = "plain",
+    srcs = ["src/main/java/com/example/serde/PlainMessage.java"],
+    javacopts = MICRONAUT_JAVACOPTS,
+    deps = ["@micronaut//:serialization"],
+)
+
+# The same wiring can be assembled manually, without a feature target.
+java_plugin(
+    name = "serde_visitors",
+    deps = ["@maven//:io_micronaut_serde_micronaut_serde_processor"],
+)
+
+micronaut_library(
+    name = "manual",
+    srcs = ["src/main/java/com/example/serde/ManualMessage.java"],
+    plugins = [":serde_visitors"],
+    deps = ["@maven//:io_micronaut_serde_micronaut_serde_api"],
+)
+
+micronaut_application(
+    name = "app",
+    srcs = ["src/main/java/com/example/serde/SerdeApplication.java"],
+    main_class = "com.example.serde.SerdeApplication",
+    runtime = "none",
+    runtime_deps = ["@micronaut//:serialization_jackson"],
+    deps = ["@micronaut//:serialization"],
+)
+
+micronaut_test(
+    name = "SerdeTest",
+    srcs = ["src/test/java/com/example/serde/SerdeTest.java"],
+    data = [":app"],
+    jvm_flags = ["-Dfeatures.serde_app=$(rlocationpath :app)"],
+    runtime = "none",
+    runtime_deps = ["@micronaut//:serialization_jackson"],
+    deps = [
+        ":manual",
+        ":plain",
+        ":serialization-jackson",
+        "//features/serialization",
+        "@micronaut//:serialization",
+        "@rules_java//java/runfiles",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [
+        ":SerdeTest",
+    ],
+    visibility = ["//features:__pkg__"],
+)

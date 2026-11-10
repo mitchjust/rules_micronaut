@@ -1,0 +1,78 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_application", "micronaut_full_jar_deps", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "core",
+    srcs = glob(["src/main/java/com/example/*.java"]),
+    visibility = ["//visibility:public"],
+    deps = ["//features/core/base"],
+)
+
+# The bean's superclass and its private @Inject field are in another target.
+micronaut_test(
+    name = "LoudGreeterTest",
+    srcs = ["src/test/java/com/example/LoudGreeterTest.java"],
+    runtime = "none",
+    test_class = "com.example.LoudGreeterTest",
+    deps = [":core"],
+)
+
+# BaseLifecycle keeps a private @PostConstruct method, which only the full jar
+# of its target contains.
+micronaut_full_jar_deps(
+    name = "base_full",
+    deps = ["//features/core/base"],
+)
+
+micronaut_test(
+    name = "PrivateMethodTest",
+    srcs = ["src/test/java/com/example/PrivateMethodTest.java"],
+    runtime = "none",
+    deps = [":base_full"],
+)
+
+micronaut_test(
+    name = "CrossTargetTest",
+    srcs = ["src/test/java/com/example/CrossTargetTest.java"],
+    runtime = "none",
+    deps = [
+        "//features/core/base",
+        "//features/core/plain",
+    ],
+)
+
+micronaut_test(
+    name = "ConfigAndAopTest",
+    srcs = ["src/test/java/com/example/ConfigAndAopTest.java"],
+    resources = glob(["src/test/resources/**"]),
+    runtime = "none",
+    runtime_deps = ["@maven//:org_yaml_snakeyaml"],
+    deps = [":core"],
+)
+
+micronaut_application(
+    name = "app",
+    srcs = ["src/main/java/com/example/core/CoreApplication.java"],
+    main_class = "com.example.core.CoreApplication",
+    runtime = "none",
+)
+
+micronaut_test(
+    name = "CoreTest",
+    srcs = ["src/test/java/com/example/core/CoreTest.java"],
+    data = [":app"],
+    jvm_flags = ["-Dfeatures.core_app=$(rlocationpath :app)"],
+    runtime = "none",
+    deps = ["@rules_java//java/runfiles"],
+)
+
+test_suite(
+    name = "tests",
+    tests = [
+        ":ConfigAndAopTest",
+        ":CoreTest",
+        ":CrossTargetTest",
+        ":LoudGreeterTest",
+        ":PrivateMethodTest",
+    ],
+    visibility = ["//features:__pkg__"],
+)

@@ -1,0 +1,16 @@
+import %workspace%/tools/preset.bazelrc
+
+# Rulesets should state minimum dependency versions, not chase the newest.
+common --config=ruleset
+
+# Keep MODULE.bazel.lock complete and committed. To update:
+#     bazel mod tidy --lockfile_mode=refresh
+common --lockfile_mode=error
+
+# Micronaut 5 and the feature catalogue require Java 25.
+common --java_language_version=25
+common --java_runtime_version=remotejdk_25
+common --tool_java_language_version=25
+common --tool_java_runtime_version=remotejdk_25
+
+try-import %workspace%/.bazelrc.user

@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "eclipsestore",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:eclipsestore",
+    ],
+)
+
+micronaut_test(
+    name = "EclipseStoreTest",
+    srcs = ["src/test/java/com/example/eclipsestore/EclipseStoreTest.java"],
+    runtime = "none",
+    deps = [
+        ":eclipsestore",
+        "@micronaut//:eclipsestore",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":EclipseStoreTest"],
+    visibility = ["//features:__pkg__"],
+)

@@ -1,0 +1,21 @@
+load("@rules_java//java:java_plugin.bzl", "java_plugin")
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library")
+
+# This entry point dispatches SourceGen's visitors during header compilation.
+# generates_api puts the builders it generates in the header jar.
+java_plugin(
+    name = "sourcegen",
+    generates_api = True,
+    processor_class = "io.micronaut.annotation.processing.TypeElementVisitorProcessor",
+    deps = [
+        "@maven//:io_micronaut_micronaut_inject_java",
+        "@maven//:io_micronaut_sourcegen_micronaut_sourcegen_generator_java",
+    ],
+)
+
+micronaut_library(
+    name = "base",
+    srcs = glob(["src/main/java/**/*.java"]),
+    plugins = [":sourcegen"],
+    visibility = ["//visibility:public"],
+)

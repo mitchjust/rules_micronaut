@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "sourcegen-generator",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:sourcegen_generator",
+    ],
+)
+
+micronaut_test(
+    name = "SourcegenTest",
+    srcs = ["src/test/java/com/example/sourcegen/SourcegenTest.java"],
+    runtime = "none",
+    deps = [
+        ":sourcegen-generator",
+        "@micronaut//:sourcegen_generator",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":SourcegenTest"],
+    visibility = ["//features:__pkg__"],
+)

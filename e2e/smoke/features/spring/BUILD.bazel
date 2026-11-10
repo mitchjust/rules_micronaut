@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "spring",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:spring",
+    ],
+)
+
+micronaut_test(
+    name = "SpringTest",
+    srcs = ["src/test/java/com/example/spring/SpringTest.java"],
+    runtime = "none",
+    deps = [
+        ":spring",
+        "@micronaut//:spring",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":SpringTest"],
+    visibility = ["//features:__pkg__"],
+)

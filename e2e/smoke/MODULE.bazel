@@ -1,0 +1,178 @@
+"""End-to-end smoke test: a Micronaut HTTP app with a @MicronautTest, built against rules_micronaut."""
+
+bazel_dep(name = "rules_micronaut", version = "0.0.0")
+local_path_override(
+    module_name = "rules_micronaut",
+    path = "../..",
+)
+
+bazel_dep(name = "rules_java", version = "9.3.0")
+bazel_dep(name = "rules_jvm_external", version = "7.2")
+bazel_dep(name = "bazel_skylib", version = "1.8.2")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+
+# JSON-P specifies an API, not a provider. Each test selects its provider below.
+maven.artifact(
+    artifact = "micronaut-serde-jsonp",
+    exclusions = ["org.eclipse.parsson:parsson"],
+    group = "io.micronaut.serde",
+)
+maven.install(
+    artifacts = [
+        # core
+        "io.micronaut:micronaut-inject",
+        "io.micronaut:micronaut-inject-java",
+        "io.micronaut:micronaut-core",
+        "io.micronaut:micronaut-context",
+        # Not managed by the platform BOM; matches micronaut-inject's own dependency.
+        "jakarta.inject:jakarta.inject-api:2.0.1",
+        "jakarta.annotation:jakarta.annotation-api",
+        "io.micronaut.sourcegen:micronaut-sourcegen-annotations",
+        # http
+        "io.micronaut:micronaut-http",
+        "io.micronaut:micronaut-http-validation",
+        "io.micronaut:micronaut-http-server-netty",
+        "io.micronaut:micronaut-http-client",
+        "io.micronaut:micronaut-http-client-core",
+        # serde
+        "io.micronaut.serde:micronaut-serde-api",
+        "io.micronaut.serde:micronaut-serde-processor",
+        "io.micronaut.serde:micronaut-serde-jackson",
+        # validation
+        "io.micronaut.validation:micronaut-validation",
+        "io.micronaut.validation:micronaut-validation-processor",
+        "jakarta.validation:jakarta.validation-api",
+        # security
+        "io.micronaut.security:micronaut-security",
+        "io.micronaut.security:micronaut-security-annotations",
+        "io.micronaut.security:micronaut-security-processor",
+        # aop (part of core)
+        "io.micronaut:micronaut-aop",
+        # data_jdbc
+        "io.micronaut.data:micronaut-data-model",
+        "io.micronaut.data:micronaut-data-jdbc",
+        "io.micronaut.data:micronaut-data-processor",
+        "io.micronaut.sql:micronaut-jdbc-hikari",
+        "com.h2database:h2",
+        # Cache annotations use core AOP; select the Caffeine backend directly.
+        "io.micronaut.cache:micronaut-cache-core",
+        "io.micronaut.cache:micronaut-cache-caffeine",
+        # micronaut-sourcegen @Builder (wired on //features/core/base through plugins)
+        "io.micronaut.sourcegen:micronaut-sourcegen-generator-java",
+        # Processor-backed features and their local test implementations.
+        "io.micronaut.openapi:micronaut-openapi",
+        "io.micronaut.openapi:micronaut-openapi-annotations",
+        "io.swagger.core.v3:swagger-annotations",
+        "io.micronaut.openapi:micronaut-openapi-adoc",
+        "io.micronaut.jsonschema:micronaut-json-schema-annotations",
+        "io.micronaut.jsonschema:micronaut-json-schema-processor",
+        "org.mongodb:bson",
+        "io.micronaut.serde:micronaut-serde-bson",
+        "jakarta.json:jakarta.json-api",
+        "org.eclipse.parsson:parsson:1.1.9",
+        "org.apache.johnzon:johnzon-core:2.2.0",
+        "io.micronaut.data:micronaut-data-hibernate-jpa",
+        "jakarta.persistence:jakarta.persistence-api",
+        "io.micronaut.data:micronaut-data-r2dbc",
+        "io.r2dbc:r2dbc-spi",
+        "io.projectreactor:reactor-core",
+        "io.micronaut.r2dbc:micronaut-r2dbc-core",
+        "com.fasterxml.jackson.core:jackson-annotations",
+        "jakarta.ws.rs:jakarta.ws.rs-api",
+        "io.micronaut.jaxrs:micronaut-jaxrs-server",
+        "io.micronaut.jaxrs:micronaut-jaxrs-processor",
+        "io.micrometer:micrometer-core",
+        "io.micronaut.micrometer:micronaut-micrometer-core",
+        "io.micronaut.micrometer:micronaut-micrometer-annotation",
+        "io.opentelemetry:opentelemetry-api",
+        "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations",
+        "io.micronaut.tracing:micronaut-tracing-annotation",
+        "io.micronaut.tracing:micronaut-tracing-opentelemetry-annotation",
+        "io.micronaut.tracing:micronaut-tracing-opentelemetry",
+        "org.springframework:spring-context",
+        "org.springframework:spring-beans",
+        "org.springframework:spring-core",
+        "io.micronaut.spring:micronaut-spring-annotation",
+        "org.springframework:spring-web",
+        "io.micronaut:micronaut-http-server",
+        "io.micronaut.spring:micronaut-spring-web-annotation",
+        "io.micronaut.spring:micronaut-spring-web",
+        "org.springframework.boot:spring-boot",
+        # Not managed by Micronaut's BOM; match its spring-boot version.
+        "org.springframework.boot:spring-boot-autoconfigure:4.1.0",
+        "io.micronaut.spring:micronaut-spring-boot-annotation",
+        "io.micronaut.spring:micronaut-spring-boot",
+        "com.google.inject:guice",
+        "io.micronaut.guice:micronaut-guice",
+        "io.micronaut.guice:micronaut-guice-annotation",
+        "io.micronaut.guice:micronaut-guice-processor",
+        "io.micronaut.langchain4j:micronaut-langchain4j-core",
+        "dev.langchain4j:langchain4j",
+        "dev.langchain4j:langchain4j-core",
+        "io.micronaut.langchain4j:micronaut-langchain4j-processor",
+        "io.micronaut.eclipsestore:micronaut-eclipsestore",
+        "io.micronaut.eclipsestore:micronaut-eclipsestore-annotations",
+        "io.micronaut.eclipsestore:micronaut-eclipsestore-processor",
+        "info.picocli:picocli",
+        "io.micronaut.picocli:micronaut-picocli",
+        "info.picocli:picocli-codegen",
+        "jakarta.servlet:jakarta.servlet-api",
+        "io.micronaut.servlet:micronaut-servlet-processor",
+        "io.micronaut.servlet:micronaut-http-server-jetty",
+        "io.micronaut.servlet:micronaut-http-server-tomcat",
+        "io.micronaut.servlet:micronaut-http-server-undertow",
+        "io.r2dbc:r2dbc-h2",
+        "io.opentelemetry:opentelemetry-sdk",
+        "io.opentelemetry:opentelemetry-sdk-trace",
+        "io.opentelemetry:opentelemetry-sdk-testing",
+        # OpenDI is versioned by Starter, outside the Micronaut platform BOM.
+        "org.eclipse.odi:micronaut-odi-cdi:1.0.0",
+        "org.eclipse.odi:micronaut-odi-processor-cdi:1.0.0",
+        "jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0",
+        # The BOM manages the old hibernate-jpamodelgen coordinate, now relocated.
+        "org.hibernate.orm:hibernate-processor:7.4.10.Final",
+        # Features covered by compile-only examples; no database/cloud fixtures.
+        "io.micronaut.data:micronaut-data-document-model",
+        "io.micronaut.data:micronaut-data-document-processor",
+        "io.micronaut.data:micronaut-data-mongodb",
+        "io.micronaut.data:micronaut-data-azure-cosmos",
+        "io.micronaut.data:micronaut-data-jpa-metamodel-processor",
+        "io.micronaut.data:micronaut-data-hibernate-reactive",
+        "io.micronaut.data:micronaut-data-spring-jdbc",
+        "org.springframework:spring-jdbc",
+        # Not managed by the BOM; matches micronaut-data-spring-jdbc.
+        "org.springframework.data:spring-data-commons:4.1.1",
+        "io.micronaut.el:micronaut-jakarta-el-annotations",
+        "io.micronaut.el:micronaut-jakarta-el",
+        "io.micronaut.el:micronaut-jakarta-el-processor",
+        "jakarta.el:jakarta.el-api",
+        "io.micronaut.multitenancy:micronaut-multitenancy",
+        "io.micronaut.multitenancy:micronaut-multitenancy-annotations",
+        # logging API for libraries
+        "org.slf4j:slf4j-api",
+        # optional application/test runtime support
+        "ch.qos.logback:logback-classic",
+        "org.yaml:snakeyaml",
+        # test
+        "io.micronaut.test:micronaut-test-junit5",
+        "io.micronaut.test:micronaut-test-core",
+        "org.mockito:mockito-core",
+        "org.junit.jupiter:junit-jupiter-api",
+        "org.junit.jupiter:junit-jupiter-engine",
+        "org.junit.platform:junit-platform-launcher",
+        "org.junit.platform:junit-platform-reporting",
+        "org.junit.platform:junit-platform-engine",
+        "org.junit.platform:junit-platform-commons",
+    ],
+    # The Micronaut version is chosen here, by the platform BOM.
+    boms = ["io.micronaut.platform:micronaut-platform:5.2.5"],
+    lock_file = "//:maven_install.json",
+    repositories = ["https://repo.maven.apache.org/maven2"],
+    resolver = "maven",
+)
+use_repo(maven, "maven")
+
+micronaut = use_extension("@rules_micronaut//micronaut:extensions.bzl", "micronaut")
+micronaut.maven(repo = "@maven")
+use_repo(micronaut, "micronaut")

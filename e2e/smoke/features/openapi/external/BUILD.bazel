@@ -1,0 +1,9 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library")
+
+# A separately compiled controller, explicitly included by the API definition.
+micronaut_library(
+    name = "external",
+    srcs = ["ExternalController.java"],
+    visibility = ["//features/openapi:__pkg__"],
+    deps = ["@micronaut//:http"],
+)

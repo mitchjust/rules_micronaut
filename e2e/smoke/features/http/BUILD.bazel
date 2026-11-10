@@ -1,0 +1,31 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "http",
+    srcs = glob(["src/main/java/**/*.java"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "@micronaut//:http",
+        "@micronaut//:serialization",
+    ],
+)
+
+micronaut_test(
+    name = "HelloControllerTest",
+    # test_class is derived from the name and the src/test/java layout.
+    srcs = ["src/test/java/com/example/HelloControllerTest.java"],
+    runtime_deps = [
+        "@maven//:io_micronaut_micronaut_http_client",
+        "@micronaut//:serialization_jackson",
+    ],
+    deps = [
+        ":http",
+        "@micronaut//:http_client",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":HelloControllerTest"],
+    visibility = ["//features:__pkg__"],
+)

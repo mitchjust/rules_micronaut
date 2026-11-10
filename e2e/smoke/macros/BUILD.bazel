@@ -1,0 +1,88 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_application", "micronaut_library")
+
+# Source-free resources and exports must not acquire compile dependencies.
+micronaut_library(
+    name = "resources",
+    resource_strip_prefix = "macros/resources",
+    resources = ["resources/library.txt"],
+    runtime_deps = ["@micronaut//:core_runtime"],
+)
+
+micronaut_library(
+    name = "library",
+    srcs = ["src/main/java/com/example/macros/Greeting.java"],
+    visibility = ["//macros:__subpackages__"],
+    # A dependency may legally appear in both attributes.
+    runtime_deps = [
+        ":resources",
+        "@micronaut//:core_runtime",
+    ],
+    deps = [":resources"],
+)
+
+micronaut_library(
+    name = "exported",
+    visibility = ["//macros:__subpackages__"],
+    exports = [":library"],
+)
+
+micronaut_application(
+    name = "inline_app",
+    srcs = ["src/main/java/com/example/macros/InlineApplication.java"],
+    main_class = "com.example.macros.InlineApplication",
+    resource_strip_prefix = "macros/config",
+    resources = ["config/sentinel.txt"],
+    runtime = "none",
+    visibility = ["//macros:__subpackages__"],
+    runtime_deps = [
+        ":exported",
+        "@micronaut//:core_runtime",
+        "@micronaut//:runtime_none",
+    ],
+    deps = [":exported"],
+)
+
+config_setting(
+    name = "explicit_core",
+    define_values = {"macro_explicit_core": "true"},
+    visibility = ["//macros:__subpackages__"],
+)
+
+_LIBRARY_DEPS = select({
+    ":explicit_core": [
+        ":resources",
+        "@micronaut//:core",
+    ],
+    "//conditions:default": [":resources"],
+})
+
+micronaut_library(
+    name = "library_select",
+    srcs = ["src/main/java/com/example/macros/Greeting.java"],
+    visibility = ["//macros:__subpackages__"],
+    runtime_deps = _LIBRARY_DEPS + ["@micronaut//:core_runtime"],
+    deps = _LIBRARY_DEPS,
+)
+
+_APPLICATION_DEPS = select({
+    ":explicit_core": [
+        ":library_select",
+        "@micronaut//:core",
+    ],
+    "//conditions:default": [":library_select"],
+})
+
+micronaut_application(
+    name = "inline_app_select",
+    srcs = ["src/main/java/com/example/macros/InlineApplication.java"],
+    main_class = "com.example.macros.InlineApplication",
+    resource_strip_prefix = "macros/config",
+    resources = ["config/sentinel.txt"],
+    runtime = "none",
+    visibility = ["//macros:__subpackages__"],
+    runtime_deps = _APPLICATION_DEPS + [
+        "@micronaut//:core_runtime",
+        "@micronaut//:runtime_none",
+    ],
+    deps = _APPLICATION_DEPS,
+)

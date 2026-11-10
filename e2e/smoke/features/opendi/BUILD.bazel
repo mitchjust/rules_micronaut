@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "opendi",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:opendi",
+    ],
+)
+
+micronaut_test(
+    name = "OpenDiTest",
+    srcs = ["src/test/java/com/example/opendi/OpenDiTest.java"],
+    runtime = "none",
+    deps = [
+        ":opendi",
+        "@micronaut//:opendi",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":OpenDiTest"],
+    visibility = ["//features:__pkg__"],
+)

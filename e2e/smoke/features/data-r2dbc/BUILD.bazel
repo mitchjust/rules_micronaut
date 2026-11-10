@@ -1,0 +1,28 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "data-r2dbc",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:data_r2dbc",
+    ],
+)
+
+micronaut_test(
+    name = "DataR2dbcTest",
+    srcs = ["src/test/java/com/example/datar2dbc/DataR2dbcTest.java"],
+    runtime = "none",
+    runtime_deps = [
+        "@maven//:io_r2dbc_r2dbc_h2",
+    ],
+    deps = [
+        ":data-r2dbc",
+        "@micronaut//:data_r2dbc",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":DataR2dbcTest"],
+    visibility = ["//features:__pkg__"],
+)

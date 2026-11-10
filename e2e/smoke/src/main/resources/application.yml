@@ -1,0 +1,8 @@
+micronaut:
+  application:
+    name: smoke
+  server:
+    context-path: /smoke
+greeting:
+  salutation: Hello
+  repeat: 1

@@ -1,0 +1,27 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "http-client",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = ["@micronaut//:http_client"],
+)
+
+micronaut_test(
+    name = "HttpClientTest",
+    srcs = ["src/test/java/com/example/httpclient/HttpClientTest.java"],
+    runtime_deps = [
+        "//features/http",
+        "@maven//:io_micronaut_micronaut_http_client",
+        "@micronaut//:serialization_jackson",
+    ],
+    deps = [
+        ":http-client",
+        "@micronaut//:http_client",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":HttpClientTest"],
+    visibility = ["//features:__pkg__"],
+)

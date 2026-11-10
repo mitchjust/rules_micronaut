@@ -1,0 +1,44 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_application", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "lib",
+    srcs = glob(["src/main/java/**/*.java"]),
+    resources = glob(["src/main/resources/**"]),
+    deps = [
+        "@micronaut//:data_jpa",
+        "@micronaut//:http",
+        "@micronaut//:serialization",
+        "@micronaut//:validation",
+    ],
+)
+
+micronaut_application(
+    name = "app",
+    main_class = "com.example.Application",
+    runtime_deps = [
+        ":lib",
+        "@maven//:ch_qos_logback_logback_classic",
+        "@maven//:io_micronaut_sql_micronaut_jdbc_hikari",
+        "@maven//:org_postgresql_postgresql",
+        "@maven//:org_yaml_snakeyaml",
+        "@micronaut//:serialization_jackson",
+    ],
+)
+
+micronaut_test(
+    name = "BookControllerTest",
+    srcs = ["src/test/java/com/example/BookControllerTest.java"],
+    runtime_deps = [
+        "@maven//:com_h2database_h2",
+        "@maven//:io_micronaut_micronaut_http_client",
+        "@maven//:io_micronaut_sql_micronaut_jdbc_hikari",
+        "@maven//:org_yaml_snakeyaml",
+        "@micronaut//:serialization_jackson",
+    ],
+    deps = [
+        ":lib",
+        "@micronaut//:data_jpa",
+        "@micronaut//:http_client",
+        "@micronaut//:serialization",
+    ],
+)

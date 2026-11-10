@@ -1,0 +1,27 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "openapi",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "//features/openapi/external",
+        "@micronaut//:http",
+        "@micronaut//:openapi",
+    ],
+)
+
+micronaut_test(
+    name = "OpenApiTest",
+    srcs = ["src/test/java/com/example/openapi/OpenApiTest.java"],
+    runtime = "none",
+    deps = [
+        ":openapi",
+        "@micronaut//:openapi",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":OpenApiTest"],
+    visibility = ["//features:__pkg__"],
+)

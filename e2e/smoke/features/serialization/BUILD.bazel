@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+# Compile this model once; the format-specific tests reuse it with different mappers.
+micronaut_library(
+    name = "serialization",
+    srcs = ["src/main/java/com/example/serialization/SharedMessage.java"],
+    visibility = ["//features:__subpackages__"],
+    deps = ["@micronaut//:serialization"],
+)
+
+micronaut_test(
+    name = "SerializationTest",
+    srcs = ["src/test/java/com/example/serialization/SerializationTest.java"],
+    runtime = "none",
+    deps = [
+        ":serialization",
+        "@micronaut//:serialization",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":SerializationTest"],
+    visibility = ["//features:__pkg__"],
+)

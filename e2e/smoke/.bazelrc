@@ -1,0 +1,6 @@
+# Micronaut 5 jars are compiled for Java 25 (class file version 69), so both
+# compilation and runtime need JDK 25.
+common --java_language_version=25
+common --java_runtime_version=remotejdk_25
+common --tool_java_language_version=25
+common --tool_java_runtime_version=remotejdk_25

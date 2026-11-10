@@ -1,0 +1,26 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "spring-web",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:spring_web",
+    ],
+)
+
+micronaut_test(
+    name = "SpringWebTest",
+    srcs = ["src/test/java/com/example/springweb/SpringWebTest.java"],
+    runtime = "netty",
+    runtime_deps = ["@micronaut//:serialization_jackson"],
+    deps = [
+        ":spring-web",
+        "@micronaut//:spring_web",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":SpringWebTest"],
+    visibility = ["//features:__pkg__"],
+)

@@ -1,0 +1,29 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "data-jpa",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:data_jpa",
+    ],
+)
+
+micronaut_test(
+    name = "DataJpaTest",
+    srcs = ["src/test/java/com/example/datajpa/DataJpaTest.java"],
+    runtime = "none",
+    runtime_deps = [
+        "@maven//:com_h2database_h2",
+        "@maven//:io_micronaut_sql_micronaut_jdbc_hikari",
+    ],
+    deps = [
+        ":data-jpa",
+        "@micronaut//:data_jpa",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":DataJpaTest"],
+    visibility = ["//features:__pkg__"],
+)

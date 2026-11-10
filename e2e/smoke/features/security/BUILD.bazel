@@ -1,0 +1,31 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+# A separate package so that only these tests run behind the security filter.
+micronaut_library(
+    name = "security",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:http",
+        "@micronaut//:security",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":AccountControllerTest"],
+    visibility = ["//features:__pkg__"],
+)
+
+micronaut_test(
+    name = "AccountControllerTest",
+    srcs = ["src/test/java/com/example/security/AccountControllerTest.java"],
+    # Security's built-in endpoints need a JSON mapper at runtime.
+    runtime_deps = [
+        "@maven//:io_micronaut_micronaut_http_client",
+        "@micronaut//:serialization_jackson",
+    ],
+    deps = [
+        ":security",
+        "@micronaut//:http_client",
+    ],
+)

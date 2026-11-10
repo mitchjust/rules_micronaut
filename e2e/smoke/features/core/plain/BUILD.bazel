@@ -1,0 +1,12 @@
+# Built with plain rules_java instead of the micronaut_* macros, to check that
+# depending on @micronaut//:core is enough to run the processors.
+load("@rules_java//java:java_library.bzl", "java_library")
+load("@rules_micronaut//micronaut:defs.bzl", "MICRONAUT_JAVACOPTS")
+
+java_library(
+    name = "plain",
+    srcs = glob(["src/main/java/**/*.java"]),
+    javacopts = MICRONAUT_JAVACOPTS,
+    visibility = ["//visibility:public"],
+    deps = ["@micronaut//:core"],
+)

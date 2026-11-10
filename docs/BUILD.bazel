@@ -1,0 +1,15 @@
+# API docs, published with each release (see .github/workflows/release_prep.sh)
+# and rendered by the Bazel Central Registry from .bcr/source.template.json's
+# docs_url.
+
+starlark_doc_extract(
+    name = "defs",
+    src = "//micronaut:defs.bzl",
+    deps = ["//micronaut:defs"],
+)
+
+starlark_doc_extract(
+    name = "extensions",
+    src = "//micronaut:extensions.bzl",
+    deps = ["//micronaut:extensions"],
+)

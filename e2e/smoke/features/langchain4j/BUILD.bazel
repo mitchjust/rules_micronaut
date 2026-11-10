@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "langchain4j",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:langchain4j",
+    ],
+)
+
+micronaut_test(
+    name = "Langchain4jTest",
+    srcs = ["src/test/java/com/example/langchain4j/Langchain4jTest.java"],
+    runtime = "none",
+    deps = [
+        ":langchain4j",
+        "@micronaut//:langchain4j",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":Langchain4jTest"],
+    visibility = ["//features:__pkg__"],
+)

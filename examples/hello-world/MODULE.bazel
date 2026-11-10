@@ -1,0 +1,65 @@
+bazel_dep(name = "rules_micronaut", version = "0.0.0")
+local_path_override(
+    module_name = "rules_micronaut",
+    path = "../..",
+)
+
+bazel_dep(name = "rules_java", version = "9.3.0")
+bazel_dep(name = "rules_jvm_external", version = "7.2")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        # Core APIs and annotation processing.
+        "io.micronaut:micronaut-inject",
+        "io.micronaut:micronaut-inject-java",
+        "io.micronaut:micronaut-core",
+        "io.micronaut:micronaut-context",
+        "io.micronaut:micronaut-aop",
+        "io.micronaut.sourcegen:micronaut-sourcegen-annotations",
+        "jakarta.inject:jakarta.inject-api:2.0.1",
+        "jakarta.annotation:jakarta.annotation-api",
+        # HTTP APIs, route validation and the Netty server.
+        "io.micronaut:micronaut-http",
+        "io.micronaut:micronaut-http-validation",
+        "io.micronaut:micronaut-http-server-netty",
+        # JSON request and response serialization.
+        "io.micronaut.serde:micronaut-serde-api",
+        "io.micronaut.serde:micronaut-serde-processor",
+        "io.micronaut.serde:micronaut-serde-jackson",
+        # Bean validation for request models.
+        "io.micronaut.validation:micronaut-validation",
+        "io.micronaut.validation:micronaut-validation-processor",
+        "jakarta.validation:jakarta.validation-api",
+        # JPA APIs and repository annotation processing.
+        "io.micronaut.data:micronaut-data-model",
+        "io.micronaut.data:micronaut-data-hibernate-jpa",
+        "io.micronaut.data:micronaut-data-processor",
+        "jakarta.persistence:jakarta.persistence-api",
+        # The application chooses its connection pool and database driver.
+        "io.micronaut.sql:micronaut-jdbc-hikari",
+        "org.postgresql:postgresql",
+        # YAML configuration and application logging.
+        "org.yaml:snakeyaml",
+        "ch.qos.logback:logback-classic",
+        # HTTP tests with an in-memory H2 database.
+        "com.h2database:h2",
+        "io.micronaut:micronaut-http-client",
+        "io.micronaut:micronaut-http-client-core",
+        "io.micronaut.test:micronaut-test-junit5",
+        "io.micronaut.test:micronaut-test-core",
+        "org.junit.jupiter:junit-jupiter-api",
+        "org.junit.jupiter:junit-jupiter-engine",
+        "org.junit.platform:junit-platform-launcher",
+        "org.junit.platform:junit-platform-reporting",
+    ],
+    boms = ["io.micronaut.platform:micronaut-platform:5.2.5"],
+    lock_file = "//:maven_install.json",
+    repositories = ["https://repo.maven.apache.org/maven2"],
+    resolver = "maven",
+)
+use_repo(maven, "maven")
+
+micronaut = use_extension("@rules_micronaut//micronaut:extensions.bzl", "micronaut")
+micronaut.maven(repo = "@maven")
+use_repo(micronaut, "micronaut")

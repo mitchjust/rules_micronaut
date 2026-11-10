@@ -1,0 +1,19 @@
+micronaut:
+  application:
+    name: hello-world
+datasources:
+  default:
+    url: "jdbc:postgresql://localhost:${POSTGRES_PORT:5433}/hello"
+    username: hello
+    password: hello
+    driver-class-name: org.postgresql.Driver
+jpa:
+  default:
+    entity-scan:
+      packages:
+        - com.example
+    properties:
+      hibernate:
+        hbm2ddl:
+          # Keep the schema and data between runs of this local example.
+          auto: update

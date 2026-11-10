@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "micrometer-annotation",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:micrometer_annotation",
+    ],
+)
+
+micronaut_test(
+    name = "MicrometerAnnotationsTest",
+    srcs = ["src/test/java/com/example/micrometerannotations/MicrometerAnnotationsTest.java"],
+    runtime = "none",
+    deps = [
+        ":micrometer-annotation",
+        "@micronaut//:micrometer_annotation",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":MicrometerAnnotationsTest"],
+    visibility = ["//features:__pkg__"],
+)

@@ -1,0 +1,29 @@
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+
+exports_files(
+    [
+        "defs.bzl",
+        "extensions.bzl",
+    ],
+    visibility = ["//docs:__pkg__"],
+)
+
+bzl_library(
+    name = "defs",
+    srcs = ["defs.bzl"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//micronaut/private:common",
+        "//micronaut/private:full_jar_deps",
+        "//micronaut/private:micronaut_application",
+        "//micronaut/private:micronaut_library",
+        "//micronaut/private:micronaut_test",
+    ],
+)
+
+bzl_library(
+    name = "extensions",
+    srcs = ["extensions.bzl"],
+    visibility = ["//visibility:public"],
+    deps = ["//micronaut/private:micronaut_repo"],
+)

@@ -1,0 +1,28 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "tracing-opentelemetry-annotations",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:tracing_opentelemetry_annotations",
+    ],
+)
+
+micronaut_test(
+    name = "TracingAnnotationsTest",
+    srcs = ["src/test/java/com/example/tracingopentelemetryannotations/TracingAnnotationsTest.java"],
+    runtime = "none",
+    deps = [
+        ":tracing-opentelemetry-annotations",
+        "@maven//:io_opentelemetry_opentelemetry_sdk",
+        "@maven//:io_opentelemetry_opentelemetry_sdk_testing",
+        "@maven//:io_opentelemetry_opentelemetry_sdk_trace",
+        "@micronaut//:tracing_opentelemetry_annotations",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":TracingAnnotationsTest"],
+    visibility = ["//features:__pkg__"],
+)

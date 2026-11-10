@@ -1,0 +1,45 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "serialization-jsonp",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:serialization",
+    ],
+)
+
+micronaut_test(
+    name = "SerdeJsonpTest",
+    srcs = ["src/test/java/com/example/serdejsonp/SerdeJsonpTest.java"],
+    jvm_flags = ["-Djsonp.provider=org.eclipse.parsson.JsonProviderImpl"],
+    runtime = "none",
+    runtime_deps = ["@maven//:org_eclipse_parsson_parsson"],
+    deps = [
+        ":serialization-jsonp",
+        "//features/serialization",
+        "@micronaut//:serialization_jsonp",
+    ],
+)
+
+micronaut_test(
+    name = "JohnzonTest",
+    srcs = ["src/test/java/com/example/serdejsonp/SerdeJsonpTest.java"],
+    jvm_flags = ["-Djsonp.provider=org.apache.johnzon.core.JsonProviderImpl"],
+    runtime = "none",
+    test_class = "com.example.serdejsonp.SerdeJsonpTest",
+    runtime_deps = ["@maven//:org_apache_johnzon_johnzon_core"],
+    deps = [
+        ":serialization-jsonp",
+        "//features/serialization",
+        "@micronaut//:serialization_jsonp",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [
+        ":JohnzonTest",
+        ":SerdeJsonpTest",
+    ],
+    visibility = ["//features:__pkg__"],
+)

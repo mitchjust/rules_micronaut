@@ -1,0 +1,9 @@
+load("@rules_java//java:java_test.bzl", "java_test")
+
+java_test(
+    name = "PrivateInjectionCheckerTest",
+    srcs = ["PrivateInjectionCheckerTest.java"],
+    main_class = "rules_micronaut.checks.PrivateInjectionCheckerTest",
+    use_testrunner = False,
+    deps = ["//micronaut/private/checks:private_injection_checker"],
+)

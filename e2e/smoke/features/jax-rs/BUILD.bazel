@@ -1,0 +1,28 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "jax-rs",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:jax_rs",
+    ],
+)
+
+micronaut_test(
+    name = "JaxrsTest",
+    srcs = ["src/test/java/com/example/jaxrs/JaxrsTest.java"],
+    runtime = "netty",
+    runtime_deps = ["@micronaut//:serialization_jackson"],
+    deps = [
+        ":jax-rs",
+        "@maven//:io_micronaut_micronaut_http_server",
+        "@micronaut//:http",
+        "@micronaut//:jax_rs",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":JaxrsTest"],
+    visibility = ["//features:__pkg__"],
+)

@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "picocli",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:picocli",
+    ],
+)
+
+micronaut_test(
+    name = "PicocliTest",
+    srcs = ["src/test/java/com/example/picocli/PicocliTest.java"],
+    runtime = "none",
+    deps = [
+        ":picocli",
+        "@micronaut//:picocli",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":PicocliTest"],
+    visibility = ["//features:__pkg__"],
+)

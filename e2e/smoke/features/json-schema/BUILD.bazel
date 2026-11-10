@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "json-schema",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:json_schema",
+    ],
+)
+
+micronaut_test(
+    name = "JsonSchemaTest",
+    srcs = ["src/test/java/com/example/jsonschema/JsonSchemaTest.java"],
+    runtime = "none",
+    deps = [
+        ":json-schema",
+        "@micronaut//:json_schema",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":JsonSchemaTest"],
+    visibility = ["//features:__pkg__"],
+)

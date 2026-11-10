@@ -1,0 +1,8 @@
+# Configuration for 'git archive', used by .github/workflows/release_prep.sh.
+# e2e/ must stay in the archive: the BCR presubmit runs e2e/smoke from it.
+
+# Dev-only: loads bazelrc-preset.bzl, a dev_dependency that consumers don't have.
+tools/BUILD.bazel export-ignore
+
+# Maintainer-only feature catalogue.
+tools/feature_catalogue/ export-ignore

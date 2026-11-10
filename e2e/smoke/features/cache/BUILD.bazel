@@ -1,0 +1,22 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+# The feature supplies cache APIs and core AOP; the test selects the backend.
+micronaut_library(
+    name = "cache",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = ["@micronaut//:cache"],
+)
+
+micronaut_test(
+    name = "CacheTest",
+    srcs = ["src/test/java/com/example/cache/CacheTest.java"],
+    runtime = "none",
+    runtime_deps = ["@maven//:io_micronaut_cache_micronaut_cache_caffeine"],
+    deps = [":cache"],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":CacheTest"],
+    visibility = ["//features:__pkg__"],
+)

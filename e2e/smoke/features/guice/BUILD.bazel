@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "guice",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:guice",
+    ],
+)
+
+micronaut_test(
+    name = "GuiceTest",
+    srcs = ["src/test/java/com/example/guice/GuiceTest.java"],
+    runtime = "none",
+    deps = [
+        ":guice",
+        "@micronaut//:guice",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":GuiceTest"],
+    visibility = ["//features:__pkg__"],
+)

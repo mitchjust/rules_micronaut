@@ -1,0 +1,77 @@
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load(":errors.bzl", "failing")
+
+failing(
+    name = "unconfigured",
+    message = """rules_micronaut is not configured. Add to the root MODULE.bazel:
+
+    micronaut = use_extension("@rules_micronaut//micronaut:extensions.bzl", "micronaut")
+    micronaut.maven(repo = "@maven")
+""",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+bzl_library(
+    name = "features",
+    srcs = ["features.bzl"],
+    visibility = ["//micronaut:__subpackages__"],
+)
+
+bzl_library(
+    name = "micronaut_repo",
+    srcs = ["micronaut_repo.bzl"],
+    visibility = ["//micronaut:__subpackages__"],
+    deps = [":features"],
+)
+
+bzl_library(
+    name = "full_jar_deps",
+    srcs = ["full_jar_deps.bzl"],
+    visibility = ["//micronaut:__subpackages__"],
+    deps = ["@rules_java//java/common"],
+)
+
+bzl_library(
+    name = "common",
+    srcs = ["common.bzl"],
+    visibility = ["//micronaut:__subpackages__"],
+)
+
+bzl_library(
+    name = "micronaut_library",
+    srcs = ["micronaut_library.bzl"],
+    visibility = ["//micronaut:__subpackages__"],
+    deps = [
+        ":common",
+        "@rules_java//java:rules",
+    ],
+)
+
+bzl_library(
+    name = "micronaut_application",
+    srcs = ["micronaut_application.bzl"],
+    visibility = ["//micronaut:__subpackages__"],
+    deps = [
+        ":common",
+        "@rules_java//java:rules",
+    ],
+)
+
+bzl_library(
+    name = "micronaut_test",
+    srcs = ["micronaut_test.bzl"],
+    visibility = ["//micronaut:__subpackages__"],
+    deps = [
+        ":common",
+        # Missing from contrib_rules_jvm's transitive bzl_library declarations.
+        "@bazel_skylib//rules:run_binary",
+        "@contrib_rules_jvm//java:defs",
+    ],
+)
+
+bzl_library(
+    name = "errors",
+    srcs = ["errors.bzl"],
+    visibility = ["//micronaut:__subpackages__"],
+)

@@ -1,0 +1,33 @@
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_full_jar_deps", "micronaut_library")
+
+micronaut_library(
+    name = "data-azure-cosmos",
+    srcs = glob(
+        ["src/main/java/**/*.java"],
+        exclude = ["src/main/java/com/example/dataazurecosmos/GeneratedTypes.java"],
+    ),
+    deps = ["@micronaut//:data_azure_cosmos"],
+)
+
+# Compile a separate consumer so missing processor output fails the build. It
+# names generated implementation classes, which only the full jar contains.
+micronaut_full_jar_deps(
+    name = "full",
+    deps = [":data-azure-cosmos"],
+)
+
+micronaut_library(
+    name = "generated-code",
+    srcs = ["src/main/java/com/example/dataazurecosmos/GeneratedTypes.java"],
+    deps = [
+        ":full",
+        "@micronaut//:data_azure_cosmos",
+    ],
+)
+
+build_test(
+    name = "tests",
+    targets = [":generated-code"],
+    visibility = ["//features:__pkg__"],
+)

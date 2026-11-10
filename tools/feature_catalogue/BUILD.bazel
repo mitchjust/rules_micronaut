@@ -1,0 +1,18 @@
+load("@rules_java//java:java_binary.bzl", "java_binary")
+
+java_binary(
+    name = "feature_catalogue",
+    srcs = ["FeatureCatalogue.java"],
+    main_class = "FeatureCatalogue",
+    resource_strip_prefix = "tools/feature_catalogue",
+    resources = ["logback.xml"],
+    runtime_deps = ["@feature_catalogue_maven//:ch_qos_logback_logback_classic"],
+    deps = [
+        "@feature_catalogue_maven//:io_micronaut_micronaut_inject",
+        "@feature_catalogue_maven//:io_micronaut_micronaut_json_core",
+        "@feature_catalogue_maven//:io_micronaut_starter_micronaut_starter_core",
+        "@feature_catalogue_maven//:org_apache_maven_resolver_maven_resolver_api",
+        "@feature_catalogue_maven//:org_apache_maven_resolver_maven_resolver_supplier_mvn3",
+        "@feature_catalogue_maven//:org_apache_maven_resolver_maven_resolver_util",
+    ],
+)

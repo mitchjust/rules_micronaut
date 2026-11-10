@@ -1,0 +1,52 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_application", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "lib",
+    srcs = glob(["src/main/java/**/*.java"]),
+    resources = glob(["src/main/resources/**"]),
+    runtime_deps = [
+        "//features/core",
+        "//features/http",
+        "//features/validation",
+    ],
+)
+
+micronaut_application(
+    name = "app",
+    main_class = "com.example.Application",
+    runtime_deps = [
+        ":lib",
+        "@maven//:ch_qos_logback_logback_classic",
+        "@maven//:org_yaml_snakeyaml",
+        "@micronaut//:serialization_jackson",
+    ],
+)
+
+micronaut_test(
+    name = "MockBeanTest",
+    srcs = ["src/test/java/com/example/MockBeanTest.java"],
+    data = ["@maven//:org_mockito_mockito_core"],
+    # Load Mockito as an agent rather than letting it self-attach, which JDK 21+
+    # warns about and future JDKs will block.
+    jvm_flags = ["-javaagent:$(rootpath @maven//:org_mockito_mockito_core)"],
+    runtime_deps = [
+        "@maven//:io_micronaut_micronaut_http_client",
+        "@micronaut//:serialization_jackson",
+    ],
+    deps = [
+        "//features/http",
+        "@maven//:org_mockito_mockito_core",
+        "@micronaut//:http_client",
+    ],
+)
+
+micronaut_test(
+    name = "ApplicationTest",
+    srcs = ["src/test/java/com/example/ApplicationTest.java"],
+    data = [":app"],
+    jvm_flags = ["-Dapplication_binary=$(rlocationpath :app)"],
+    runtime = "none",
+    # Starts the app on a random local port.
+    tags = ["requires-network"],
+    deps = ["@rules_java//java/runfiles"],
+)
