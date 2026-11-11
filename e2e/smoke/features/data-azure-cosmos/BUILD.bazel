@@ -1,29 +1,30 @@
-load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library")
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
 
 micronaut_library(
     name = "data-azure-cosmos",
-    srcs = glob(
-        ["src/main/java/**/*.java"],
-        exclude = ["src/main/java/com/example/dataazurecosmos/GeneratedTypes.java"],
-    ),
-    # The consumer names generated implementation classes absent from header jars.
-    export_full_jar = True,
+    srcs = glob(["src/main/java/**/*.java"]),
     deps = ["@micronaut//:data_azure_cosmos"],
 )
 
-# Compile a separate consumer so missing processor output fails the build.
-micronaut_library(
-    name = "generated-code",
-    srcs = ["src/main/java/com/example/dataazurecosmos/GeneratedTypes.java"],
+micronaut_test(
+    name = "CosmosTest",
+    size = "large",
+    srcs = ["src/test/java/com/example/dataazurecosmos/CosmosTest.java"],
+    runtime = "none",
+    # Reactor Netty probes QUIC even in gateway mode; the resolved HTTP/3 closure omits it.
+    runtime_deps = ["@maven//:io_netty_netty_codec_classes_quic"],
     deps = [
         ":data-azure-cosmos",
+        "@maven//:io_micronaut_micronaut_json_core",
+        "@maven//:org_testcontainers_testcontainers",
+        "@maven//:org_testcontainers_testcontainers_azure",
+        "@maven//:org_testcontainers_testcontainers_junit_jupiter",
         "@micronaut//:data_azure_cosmos",
     ],
 )
 
-build_test(
+test_suite(
     name = "tests",
-    targets = [":generated-code"],
+    tests = [":CosmosTest"],
     visibility = ["//features:__pkg__"],
 )

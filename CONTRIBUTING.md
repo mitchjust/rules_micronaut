@@ -24,7 +24,7 @@ bazel test //...                     # Rule unit tests and API documentation
 ```
 
 The example's tests use an in-memory H2 database, so Docker is not required.
-The smoke suite's MongoDB and Hibernate Reactive tests use Testcontainers and
+The smoke suite's MongoDB, Azure Cosmos DB and Hibernate Reactive tests use Testcontainers and
 require a running Docker-compatible container runtime.
 
 CI also repeats the smoke suite with `rules_java` forced to the minimum declared
