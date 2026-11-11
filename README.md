@@ -136,7 +136,9 @@ feature supplies its APIs, annotation processors and runtime dependencies;
 on direct dependants only, so a feature can be re-exported through a
 `java_library(exports = [...])` bundle but not picked up transitively.
 
-Each feature is available as `@micronaut//:<name>` and links to an example:
+Each feature is available as `@micronaut//:<name>` and links to an example with
+executable smoke tests. Database and messaging tests that use Testcontainers
+require a running Docker-compatible runtime; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 | Feature                                                                                     | Provides                                                   |
 | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
@@ -161,13 +163,17 @@ Each feature is available as `@micronaut//:<name>` and links to an example:
 | [`kafka`](e2e/smoke/features/kafka)                                                         | Kafka producers, listeners and messaging APIs              |
 | [`langchain4j`](e2e/smoke/features/langchain4j)                                             | LangChain4j AI services                                    |
 | [`lombok`](e2e/smoke/features/lombok)                                                       | Compile-only Lombok annotations; explicit plugin required  |
+| [`management`](e2e/smoke/features/management)                                               | Health and custom management endpoints; includes `http`    |
 | [`micrometer_annotation`](e2e/smoke/features/micrometer-annotation)                         | Micrometer `@Counted` and `@Timed`                         |
 | [`multi_tenancy`](e2e/smoke/features/multi-tenancy)                                         | Tenant resolution                                          |
 | [`openapi`](e2e/smoke/features/openapi)                                                     | OpenAPI specification generation, under `META-INF/swagger` |
 | [`openapi_adoc`](e2e/smoke/features/openapi-adoc)                                           | OpenAPI and AsciiDoc generation; includes `openapi`        |
 | [`opendi`](e2e/smoke/features/opendi)                                                       | OpenDI CDI Lite                                            |
 | [`picocli`](e2e/smoke/features/picocli)                                                     | Picocli commands and native-image metadata                 |
+| [`rabbitmq`](e2e/smoke/features/rabbitmq)                                                   | RabbitMQ producers, listeners and messaging APIs           |
+| [`retry`](e2e/smoke/features/retry)                                                         | Retry, circuit-breaker and fallback advice                 |
 | [`security`](e2e/smoke/features/security)                                                   | Micronaut Security                                         |
+| [`security_jwt`](e2e/smoke/features/security-jwt)                                           | JWT signing and bearer authentication; includes `security` |
 | [`serialization`](e2e/smoke/features/serialization)                                         | Serialization APIs and code generation, without a mapper   |
 | [`serialization_bson`](e2e/smoke/features/serialization-bson)                               | BSON mapper; includes `serialization`                      |
 | [`serialization_jackson`](e2e/smoke/features/serialization-jackson)                         | Jackson mapper; includes `serialization`                   |
@@ -179,6 +185,7 @@ Each feature is available as `@micronaut//:<name>` and links to an example:
 | [`spring_web`](e2e/smoke/features/spring-web)                                               | Spring Web routes; includes `spring`                       |
 | [`tracing_opentelemetry_annotations`](e2e/smoke/features/tracing-opentelemetry-annotations) | OpenTelemetry span annotations                             |
 | [`validation`](e2e/smoke/features/validation)                                               | Bean validation                                            |
+| [`websocket`](e2e/smoke/features/websocket)                                                 | WebSocket clients and servers; includes `http_client`      |
 
 Your Maven resolution must contain the artifacts of every feature you select,
 including the features it includes. [features.bzl](micronaut/private/features.bzl)
@@ -218,6 +225,13 @@ the `deps` of targets compiling servlet sources.
 
 ## Feature notes
 
+- **`management`:** select a JSON mapper at runtime for HTTP endpoint responses.
+- **`rabbitmq`:** configure `rabbitmq.uri` and provision queues and exchanges, for
+  example with a `ChannelInitializer` bean as in the smoke test.
+- **`security_jwt`:** configure bearer authentication and signing or validation keys.
+  The smoke test uses a test-only signing secret; applications supply their own.
+- **`websocket`:** select a WebSocket-capable server and client transport, such as
+  Netty, and a JSON mapper in `runtime_deps`. The feature supplies the APIs.
 - **`data_hibernate_reactive`:** set `jpa.default.reactive=true`, add a Vert.x
   SQL client, and add `@maven//:io_projectreactor_reactor_core` to `deps` when
   using Reactor types.

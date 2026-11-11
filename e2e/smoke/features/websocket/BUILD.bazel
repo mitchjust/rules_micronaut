@@ -1,0 +1,29 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "websocket",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:websocket",
+    ],
+)
+
+micronaut_test(
+    name = "WebsocketTest",
+    srcs = ["src/test/java/com/example/websocket/WebsocketTest.java"],
+    runtime_deps = [
+        "@maven//:io_micronaut_micronaut_http_client",
+        "@micronaut//:serialization_jackson",
+    ],
+    deps = [
+        ":websocket",
+        "@maven//:io_projectreactor_reactor_core",
+        "@micronaut//:websocket",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":WebsocketTest"],
+    visibility = ["//features:__pkg__"],
+)

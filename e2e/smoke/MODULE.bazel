@@ -63,6 +63,16 @@ maven.install(
         "io.micronaut:micronaut-messaging",
         "org.apache.kafka:kafka-clients",
         "org.testcontainers:testcontainers-kafka",
+        # Additional service APIs; providers and transports remain test choices.
+        "io.micronaut:micronaut-retry",
+        "io.micronaut:micronaut-management",
+        "io.micronaut:micronaut-websocket",
+        "org.reactivestreams:reactive-streams",
+        "io.micronaut.security:micronaut-security-jwt",
+        "com.nimbusds:nimbus-jose-jwt",
+        "io.micronaut.rabbitmq:micronaut-rabbitmq",
+        "com.rabbitmq:amqp-client",
+        "org.testcontainers:testcontainers-rabbitmq",
         # micronaut-sourcegen @Builder (wired on //features/core/base through plugins)
         "io.micronaut.sourcegen:micronaut-sourcegen-generator-java",
         # Processor-backed features and their local test implementations.

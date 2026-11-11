@@ -1,0 +1,28 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "rabbitmq",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:rabbitmq",
+    ],
+)
+
+micronaut_test(
+    name = "RabbitmqTest",
+    srcs = ["src/test/java/com/example/rabbitmq/RabbitmqTest.java"],
+    runtime = "none",
+    deps = [
+        ":rabbitmq",
+        "@maven//:org_testcontainers_testcontainers",
+        "@maven//:org_testcontainers_testcontainers_junit_jupiter",
+        "@maven//:org_testcontainers_testcontainers_rabbitmq",
+        "@micronaut//:rabbitmq",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":RabbitmqTest"],
+    visibility = ["//features:__pkg__"],
+)

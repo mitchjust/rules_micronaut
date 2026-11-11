@@ -1,0 +1,25 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "retry",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:retry",
+    ],
+)
+
+micronaut_test(
+    name = "RetryTest",
+    srcs = ["src/test/java/com/example/retry/RetryTest.java"],
+    runtime = "none",
+    deps = [
+        ":retry",
+        "@micronaut//:retry",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":RetryTest"],
+    visibility = ["//features:__pkg__"],
+)
