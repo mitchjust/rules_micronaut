@@ -42,6 +42,7 @@
     "io.micronaut.jaxrs:micronaut-jaxrs-server": -831028121,
     "io.micronaut.jsonschema:micronaut-json-schema-annotations": 614430821,
     "io.micronaut.jsonschema:micronaut-json-schema-processor": -880114825,
+    "io.micronaut.kafka:micronaut-kafka": -1562475017,
     "io.micronaut.langchain4j:micronaut-langchain4j-core": -1088334091,
     "io.micronaut.langchain4j:micronaut-langchain4j-processor": 1264812828,
     "io.micronaut.micrometer:micronaut-micrometer-annotation": -849073745,
@@ -92,6 +93,7 @@
     "io.micronaut:micronaut-http-validation": -1827338393,
     "io.micronaut:micronaut-inject": 2102829150,
     "io.micronaut:micronaut-inject-java": 1101677671,
+    "io.micronaut:micronaut-messaging": -1870208243,
     "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations": 292923502,
     "io.opentelemetry:opentelemetry-api": 237530819,
     "io.opentelemetry:opentelemetry-sdk": -314306333,
@@ -112,6 +114,7 @@
     "jakarta.validation:jakarta.validation-api": -1858198223,
     "jakarta.ws.rs:jakarta.ws.rs-api": -1152503271,
     "org.apache.johnzon:johnzon-core": -642954798,
+    "org.apache.kafka:kafka-clients": -1662559649,
     "org.eclipse.odi:micronaut-odi-cdi": 664339328,
     "org.eclipse.odi:micronaut-odi-processor-cdi": -1145057787,
     "org.eclipse.parsson:parsson": 918376062,
@@ -136,6 +139,7 @@
     "org.springframework:spring-jdbc": 1068649970,
     "org.springframework:spring-web": -1196164797,
     "org.testcontainers:testcontainers-junit-jupiter": -918230293,
+    "org.testcontainers:testcontainers-kafka": -1796937005,
     "org.testcontainers:testcontainers-mongodb": 1046703263,
     "org.testcontainers:testcontainers-postgresql": 110741309,
     "org.yaml:snakeyaml": 1970926692,
@@ -143,6 +147,7 @@
   },
   "__RESOLVED_ARTIFACTS_HASH": {
     "aopalliance:aopalliance": -1763688673,
+    "at.yawk.lz4:lz4-java": -1658461511,
     "ch.qos.logback:logback-classic": 1651934264,
     "ch.qos.logback:logback-core": 1441290378,
     "com.azure:azure-core": 101840981,
@@ -161,6 +166,7 @@
     "com.github.docker-java:docker-java-transport-zerodep": 372204928,
     "com.github.javaparser:javaparser-core": 1223654130,
     "com.github.javaparser:javaparser-symbol-solver-core": 596048187,
+    "com.github.luben:zstd-jni": -1239372368,
     "com.google.code.findbugs:jsr305": -1038659426,
     "com.google.code.gson:gson": 1618556651,
     "com.google.errorprone:error_prone_annotations": 492382488,
@@ -262,6 +268,7 @@
     "io.micronaut.jsonschema:micronaut-json-schema-annotations": 1587597635,
     "io.micronaut.jsonschema:micronaut-json-schema-common": 1712053141,
     "io.micronaut.jsonschema:micronaut-json-schema-processor": -1947750602,
+    "io.micronaut.kafka:micronaut-kafka": -452146626,
     "io.micronaut.langchain4j:micronaut-langchain4j-core": 560397189,
     "io.micronaut.langchain4j:micronaut-langchain4j-processor": -1314570344,
     "io.micronaut.micrometer:micronaut-micrometer-annotation": 618364429,
@@ -338,6 +345,7 @@
     "io.micronaut:micronaut-inject-java": 353007380,
     "io.micronaut:micronaut-jackson-core": 1342605778,
     "io.micronaut:micronaut-json-core": -1851818956,
+    "io.micronaut:micronaut-messaging": -471351423,
     "io.micronaut:micronaut-module-info": 1779289044,
     "io.micronaut:micronaut-retry": -1336207211,
     "io.micronaut:micronaut-router": 1152576371,
@@ -437,6 +445,7 @@
     "org.apache.commons:commons-compress": -1752394903,
     "org.apache.commons:commons-lang3": 1110126408,
     "org.apache.johnzon:johnzon-core": -687355550,
+    "org.apache.kafka:kafka-clients": -1896022593,
     "org.apache.opennlp:opennlp-tools": 1517943736,
     "org.apache.tomcat.embed:tomcat-embed-core": -1975798792,
     "org.apache.tomcat:tomcat-annotations-api": -1096337473,
@@ -528,10 +537,12 @@
     "org.testcontainers:testcontainers-database-commons": 2131696717,
     "org.testcontainers:testcontainers-jdbc": -375925443,
     "org.testcontainers:testcontainers-junit-jupiter": 276011375,
+    "org.testcontainers:testcontainers-kafka": -678356138,
     "org.testcontainers:testcontainers-mongodb": -1072274279,
     "org.testcontainers:testcontainers-postgresql": -805991591,
     "org.wildfly.client:wildfly-client-config": 1701176345,
     "org.wildfly.common:wildfly-common": -380690923,
+    "org.xerial.snappy:snappy-java": 809063461,
     "org.yaml:snakeyaml": 1853427032,
     "tools.jackson.core:jackson-core": -450770834,
     "tools.jackson.core:jackson-databind": 1223912005,
@@ -543,6 +554,12 @@
         "jar": "0addec670fedcd3f113c5c8091d783280d23f75e3acb841b61a9cdb079376a08"
       },
       "version": "1.0"
+    },
+    "at.yawk.lz4:lz4-java": {
+      "shasums": {
+        "jar": "252dabd586d22149a31661a8afc1a50747714eb1a298bd4a6e780c8c91a13866"
+      },
+      "version": "1.10.2"
     },
     "ch.qos.logback:logback-classic": {
       "shasums": {
@@ -651,6 +668,12 @@
         "jar": "4cb097c0834427939c01f4169dd0bab20068673913341c5b6db27be1a7445098"
       },
       "version": "3.28.2"
+    },
+    "com.github.luben:zstd-jni": {
+      "shasums": {
+        "jar": "b6c3237e24b8252a5a9c3a0e1ae30ef8f323412e74bd358548b7a9e527d676df"
+      },
+      "version": "1.5.6-10"
     },
     "com.google.code.findbugs:jsr305": {
       "shasums": {
@@ -1258,6 +1281,12 @@
       },
       "version": "2.3.1"
     },
+    "io.micronaut.kafka:micronaut-kafka": {
+      "shasums": {
+        "jar": "38164e5ab59f68086348819476c81424b8a908dc7fc7e19c89486b706b9b86e0"
+      },
+      "version": "6.2.0"
+    },
     "io.micronaut.langchain4j:micronaut-langchain4j-core": {
       "shasums": {
         "jar": "c7decb6f3e060a4f8add00646cc9def5f82773c1c231a1036d0482578af37e51"
@@ -1711,6 +1740,12 @@
     "io.micronaut:micronaut-json-core": {
       "shasums": {
         "jar": "5f293f8c671d2512fbe3175d35ce263cdc58089897ac85f0465798b6acac520b"
+      },
+      "version": "5.2.22"
+    },
+    "io.micronaut:micronaut-messaging": {
+      "shasums": {
+        "jar": "0600e1b1fa93ac6a3a5933dd40706814052f53393155d0e868cb4d2b864ee5ad"
       },
       "version": "5.2.22"
     },
@@ -2283,6 +2318,12 @@
       },
       "version": "2.2.0"
     },
+    "org.apache.kafka:kafka-clients": {
+      "shasums": {
+        "jar": "52501b7b47510c66f898871adaf6d2968ab7246561d44ced43643a8a587f0b36"
+      },
+      "version": "4.3.1"
+    },
     "org.apache.opennlp:opennlp-tools": {
       "shasums": {
         "jar": "58c0ee5e20d30ba47daf4cd546c6426a7fe762a7b197b2308eb0b89cf5b48c77"
@@ -2829,6 +2870,12 @@
       },
       "version": "2.0.5"
     },
+    "org.testcontainers:testcontainers-kafka": {
+      "shasums": {
+        "jar": "83a41a6660643321640634eb658eb23f694911dd0ab672a636e824f0945c4750"
+      },
+      "version": "2.0.5"
+    },
     "org.testcontainers:testcontainers-mongodb": {
       "shasums": {
         "jar": "f47872c03f72b3e70fd277b31f6ce4535ff2ee04c62bdc9cb4ffeb61153a8552"
@@ -2852,6 +2899,12 @@
         "jar": "9fda3caf8bd528dec56ebc70daf78f5a9ff5d0bfcea8b3e41ab7ae838747e46a"
       },
       "version": "1.5.4.Final"
+    },
+    "org.xerial.snappy:snappy-java": {
+      "shasums": {
+        "jar": "4c766cb3f855415ee734b2392949a0b6f12a60879334a74518deaf6270d32e36"
+      },
+      "version": "1.1.10.7"
     },
     "org.yaml:snakeyaml": {
       "shasums": {
@@ -3448,6 +3501,14 @@
       "io.micronaut:micronaut-inject",
       "tools.jackson.core:jackson-databind"
     ],
+    "io.micronaut.kafka:micronaut-kafka": [
+      "com.fasterxml.jackson.core:jackson-core",
+      "io.micronaut:micronaut-inject",
+      "io.micronaut:micronaut-json-core",
+      "io.micronaut:micronaut-messaging",
+      "io.projectreactor:reactor-core",
+      "org.apache.kafka:kafka-clients"
+    ],
     "io.micronaut.langchain4j:micronaut-langchain4j-core": [
       "dev.langchain4j:langchain4j",
       "dev.langchain4j:langchain4j-http-client",
@@ -3915,6 +3976,10 @@
       "io.micronaut:micronaut-http",
       "org.slf4j:slf4j-api"
     ],
+    "io.micronaut:micronaut-messaging": [
+      "io.micronaut:micronaut-context",
+      "org.slf4j:slf4j-api"
+    ],
     "io.micronaut:micronaut-retry": [
       "io.micronaut:micronaut-context",
       "io.micronaut:micronaut-core-reactive",
@@ -4290,6 +4355,12 @@
       "commons-io:commons-io",
       "org.apache.commons:commons-lang3"
     ],
+    "org.apache.kafka:kafka-clients": [
+      "at.yawk.lz4:lz4-java",
+      "com.github.luben:zstd-jni",
+      "org.slf4j:slf4j-api",
+      "org.xerial.snappy:snappy-java"
+    ],
     "org.apache.opennlp:opennlp-tools": ["org.slf4j:slf4j-api"],
     "org.apache.tomcat.embed:tomcat-embed-core": [
       "org.apache.tomcat:tomcat-annotations-api"
@@ -4578,6 +4649,9 @@
     "org.testcontainers:testcontainers-junit-jupiter": [
       "org.testcontainers:testcontainers"
     ],
+    "org.testcontainers:testcontainers-kafka": [
+      "org.testcontainers:testcontainers"
+    ],
     "org.testcontainers:testcontainers-mongodb": [
       "org.testcontainers:testcontainers"
     ],
@@ -4601,6 +4675,11 @@
     "aopalliance:aopalliance": [
       "org.aopalliance.aop",
       "org.aopalliance.intercept"
+    ],
+    "at.yawk.lz4:lz4-java": [
+      "net.jpountz.lz4",
+      "net.jpountz.util",
+      "net.jpountz.xxhash"
     ],
     "ch.qos.logback:logback-classic": [
       "ch.qos.logback.classic",
@@ -5005,6 +5084,10 @@
       "com.github.javaparser.symbolsolver.resolution.typeinference.constraintformulas",
       "com.github.javaparser.symbolsolver.resolution.typesolvers",
       "com.github.javaparser.symbolsolver.utils"
+    ],
+    "com.github.luben:zstd-jni": [
+      "com.github.luben.zstd",
+      "com.github.luben.zstd.util"
     ],
     "com.google.code.findbugs:jsr305": [
       "javax.annotation",
@@ -5848,6 +5931,30 @@
       "io.micronaut.jsonschema.visitor.aggregator",
       "io.micronaut.jsonschema.visitor.context"
     ],
+    "io.micronaut.kafka:micronaut-kafka": [
+      "io.micronaut.configuration.kafka",
+      "io.micronaut.configuration.kafka.admin",
+      "io.micronaut.configuration.kafka.annotation",
+      "io.micronaut.configuration.kafka.bind",
+      "io.micronaut.configuration.kafka.bind.batch",
+      "io.micronaut.configuration.kafka.config",
+      "io.micronaut.configuration.kafka.convert",
+      "io.micronaut.configuration.kafka.event",
+      "io.micronaut.configuration.kafka.exceptions",
+      "io.micronaut.configuration.kafka.executor",
+      "io.micronaut.configuration.kafka.health",
+      "io.micronaut.configuration.kafka.intercept",
+      "io.micronaut.configuration.kafka.metrics",
+      "io.micronaut.configuration.kafka.metrics.builder",
+      "io.micronaut.configuration.kafka.processor",
+      "io.micronaut.configuration.kafka.reactor",
+      "io.micronaut.configuration.kafka.retry",
+      "io.micronaut.configuration.kafka.scope",
+      "io.micronaut.configuration.kafka.seek",
+      "io.micronaut.configuration.kafka.serde",
+      "io.micronaut.configuration.kafka.tracing.brave",
+      "io.micronaut.kafka.info"
+    ],
     "io.micronaut.langchain4j:micronaut-langchain4j-core": [
       "io.micronaut.langchain4j.aiservices",
       "io.micronaut.langchain4j.annotation",
@@ -6548,6 +6655,11 @@
       "io.micronaut.json.codec",
       "io.micronaut.json.convert",
       "io.micronaut.json.tree"
+    ],
+    "io.micronaut:micronaut-messaging": [
+      "io.micronaut.messaging",
+      "io.micronaut.messaging.annotation",
+      "io.micronaut.messaging.exceptions"
     ],
     "io.micronaut:micronaut-module-info": ["io.micronaut.module.info"],
     "io.micronaut:micronaut-retry": [
@@ -7294,6 +7406,83 @@
       "org.apache.johnzon.core",
       "org.apache.johnzon.core.io",
       "org.apache.johnzon.core.util"
+    ],
+    "org.apache.kafka:kafka-clients": [
+      "org.apache.kafka.clients",
+      "org.apache.kafka.clients.admin",
+      "org.apache.kafka.clients.admin.internals",
+      "org.apache.kafka.clients.consumer",
+      "org.apache.kafka.clients.consumer.internals",
+      "org.apache.kafka.clients.consumer.internals.events",
+      "org.apache.kafka.clients.consumer.internals.metrics",
+      "org.apache.kafka.clients.producer",
+      "org.apache.kafka.clients.producer.internals",
+      "org.apache.kafka.common",
+      "org.apache.kafka.common.acl",
+      "org.apache.kafka.common.annotation",
+      "org.apache.kafka.common.cache",
+      "org.apache.kafka.common.compress",
+      "org.apache.kafka.common.config",
+      "org.apache.kafka.common.config.internals",
+      "org.apache.kafka.common.config.provider",
+      "org.apache.kafka.common.config.types",
+      "org.apache.kafka.common.errors",
+      "org.apache.kafka.common.feature",
+      "org.apache.kafka.common.header",
+      "org.apache.kafka.common.header.internals",
+      "org.apache.kafka.common.internals",
+      "org.apache.kafka.common.memory",
+      "org.apache.kafka.common.message",
+      "org.apache.kafka.common.metrics",
+      "org.apache.kafka.common.metrics.internals",
+      "org.apache.kafka.common.metrics.stats",
+      "org.apache.kafka.common.network",
+      "org.apache.kafka.common.protocol",
+      "org.apache.kafka.common.protocol.types",
+      "org.apache.kafka.common.quota",
+      "org.apache.kafka.common.record",
+      "org.apache.kafka.common.record.internal",
+      "org.apache.kafka.common.replica",
+      "org.apache.kafka.common.requests",
+      "org.apache.kafka.common.resource",
+      "org.apache.kafka.common.security",
+      "org.apache.kafka.common.security.auth",
+      "org.apache.kafka.common.security.authenticator",
+      "org.apache.kafka.common.security.kerberos",
+      "org.apache.kafka.common.security.oauthbearer",
+      "org.apache.kafka.common.security.oauthbearer.internals",
+      "org.apache.kafka.common.security.oauthbearer.internals.expiring",
+      "org.apache.kafka.common.security.oauthbearer.internals.secured",
+      "org.apache.kafka.common.security.oauthbearer.internals.secured.assertion",
+      "org.apache.kafka.common.security.oauthbearer.internals.unsecured",
+      "org.apache.kafka.common.security.plain",
+      "org.apache.kafka.common.security.plain.internals",
+      "org.apache.kafka.common.security.scram",
+      "org.apache.kafka.common.security.scram.internals",
+      "org.apache.kafka.common.security.ssl",
+      "org.apache.kafka.common.security.token.delegation",
+      "org.apache.kafka.common.security.token.delegation.internals",
+      "org.apache.kafka.common.serialization",
+      "org.apache.kafka.common.telemetry",
+      "org.apache.kafka.common.telemetry.internals",
+      "org.apache.kafka.common.utils",
+      "org.apache.kafka.common.utils.internals",
+      "org.apache.kafka.server.authorizer",
+      "org.apache.kafka.server.policy",
+      "org.apache.kafka.server.quota",
+      "org.apache.kafka.server.telemetry",
+      "org.apache.kafka.shaded.com.google.protobuf",
+      "org.apache.kafka.shaded.com.google.protobuf.compiler",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.collector.logs.v1",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.collector.metrics.v1",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.collector.profiles.v1experimental",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.collector.trace.v1",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.common.v1",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.logs.v1",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.metrics.v1",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.profiles.v1experimental",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.resource.v1",
+      "org.apache.kafka.shaded.io.opentelemetry.proto.trace.v1"
     ],
     "org.apache.opennlp:opennlp-tools": [
       "opennlp.tools.chunker",
@@ -9440,6 +9629,10 @@
     "org.testcontainers:testcontainers-junit-jupiter": [
       "org.testcontainers.junit.jupiter"
     ],
+    "org.testcontainers:testcontainers-kafka": [
+      "org.testcontainers.containers",
+      "org.testcontainers.kafka"
+    ],
     "org.testcontainers:testcontainers-mongodb": [
       "org.testcontainers.containers",
       "org.testcontainers.mongodb"
@@ -9474,6 +9667,11 @@
       "org.wildfly.common.rpc",
       "org.wildfly.common.selector",
       "org.wildfly.common.string"
+    ],
+    "org.xerial.snappy:snappy-java": [
+      "org.xerial.snappy",
+      "org.xerial.snappy.buffer",
+      "org.xerial.snappy.pool"
     ],
     "org.yaml:snakeyaml": [
       "org.yaml.snakeyaml",
@@ -9561,6 +9759,7 @@
   "repositories": {
     "https://repo.maven.apache.org/maven2/": [
       "aopalliance:aopalliance",
+      "at.yawk.lz4:lz4-java",
       "ch.qos.logback:logback-classic",
       "ch.qos.logback:logback-core",
       "com.azure:azure-core",
@@ -9579,6 +9778,7 @@
       "com.github.docker-java:docker-java-transport-zerodep",
       "com.github.javaparser:javaparser-core",
       "com.github.javaparser:javaparser-symbol-solver-core",
+      "com.github.luben:zstd-jni",
       "com.google.code.findbugs:jsr305",
       "com.google.code.gson:gson",
       "com.google.errorprone:error_prone_annotations",
@@ -9680,6 +9880,7 @@
       "io.micronaut.jsonschema:micronaut-json-schema-annotations",
       "io.micronaut.jsonschema:micronaut-json-schema-common",
       "io.micronaut.jsonschema:micronaut-json-schema-processor",
+      "io.micronaut.kafka:micronaut-kafka",
       "io.micronaut.langchain4j:micronaut-langchain4j-core",
       "io.micronaut.langchain4j:micronaut-langchain4j-processor",
       "io.micronaut.micrometer:micronaut-micrometer-annotation",
@@ -9756,6 +9957,7 @@
       "io.micronaut:micronaut-inject-java",
       "io.micronaut:micronaut-jackson-core",
       "io.micronaut:micronaut-json-core",
+      "io.micronaut:micronaut-messaging",
       "io.micronaut:micronaut-module-info",
       "io.micronaut:micronaut-retry",
       "io.micronaut:micronaut-router",
@@ -9855,6 +10057,7 @@
       "org.apache.commons:commons-compress",
       "org.apache.commons:commons-lang3",
       "org.apache.johnzon:johnzon-core",
+      "org.apache.kafka:kafka-clients",
       "org.apache.opennlp:opennlp-tools",
       "org.apache.tomcat.embed:tomcat-embed-core",
       "org.apache.tomcat:tomcat-annotations-api",
@@ -9946,10 +10149,12 @@
       "org.testcontainers:testcontainers-database-commons",
       "org.testcontainers:testcontainers-jdbc",
       "org.testcontainers:testcontainers-junit-jupiter",
+      "org.testcontainers:testcontainers-kafka",
       "org.testcontainers:testcontainers-mongodb",
       "org.testcontainers:testcontainers-postgresql",
       "org.wildfly.client:wildfly-client-config",
       "org.wildfly.common:wildfly-common",
+      "org.xerial.snappy:snappy-java",
       "org.yaml:snakeyaml",
       "tools.jackson.core:jackson-core",
       "tools.jackson.core:jackson-databind",
@@ -10990,6 +11195,13 @@
     "org.apache.johnzon:johnzon-core": {
       "jakarta.json.spi.JsonProvider": [
         "org.apache.johnzon.core.JsonProviderImpl"
+      ]
+    },
+    "org.apache.kafka:kafka-clients": {
+      "org.apache.kafka.common.config.provider.ConfigProvider": [
+        "org.apache.kafka.common.config.provider.DirectoryConfigProvider",
+        "org.apache.kafka.common.config.provider.EnvVarConfigProvider",
+        "org.apache.kafka.common.config.provider.FileConfigProvider"
       ]
     },
     "org.eclipse.angus:angus-activation": {
