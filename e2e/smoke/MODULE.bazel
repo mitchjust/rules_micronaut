@@ -58,6 +58,11 @@ maven.install(
         # Cache annotations use core AOP; select the Caffeine backend directly.
         "io.micronaut.cache:micronaut-cache-core",
         "io.micronaut.cache:micronaut-cache-caffeine",
+        # Kafka producer and listener APIs, with a real broker for the smoke test.
+        "io.micronaut.kafka:micronaut-kafka",
+        "io.micronaut:micronaut-messaging",
+        "org.apache.kafka:kafka-clients",
+        "org.testcontainers:testcontainers-kafka",
         # micronaut-sourcegen @Builder (wired on //features/core/base through plugins)
         "io.micronaut.sourcegen:micronaut-sourcegen-generator-java",
         # Processor-backed features and their local test implementations.
