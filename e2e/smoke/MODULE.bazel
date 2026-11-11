@@ -35,6 +35,7 @@ maven.install(
         "io.micronaut:micronaut-http-server-netty",
         "io.micronaut:micronaut-http-client",
         "io.micronaut:micronaut-http-client-core",
+        "io.micronaut:micronaut-http-client-jdk",
         # serde
         "io.micronaut.serde:micronaut-serde-api",
         "io.micronaut.serde:micronaut-serde-processor",

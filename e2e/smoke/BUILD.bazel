@@ -30,7 +30,6 @@ micronaut_test(
     # warns about and future JDKs will block.
     jvm_flags = ["-javaagent:$(rootpath @maven//:org_mockito_mockito_core)"],
     runtime_deps = [
-        "@maven//:io_micronaut_micronaut_http_client",
         "@micronaut//:serialization_jackson",
     ],
     deps = [

@@ -15,7 +15,6 @@ micronaut_test(
     srcs = ["src/test/java/com/example/ValidationTest.java"],
     # HTTP validation errors need a JSON mapper at runtime.
     runtime_deps = [
-        "@maven//:io_micronaut_micronaut_http_client",
         "@micronaut//:serialization_jackson",
     ],
     deps = [

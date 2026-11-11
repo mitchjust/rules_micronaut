@@ -101,7 +101,6 @@ micronaut_test(
     srcs = ["src/test/java/com/example/HelloControllerTest.java"],
     runtime_deps = [
         "@maven//:ch_qos_logback_logback_classic",
-        "@maven//:io_micronaut_micronaut_http_client",
         "@maven//:org_yaml_snakeyaml",
         "@micronaut//:serialization_jackson",
     ],
@@ -156,7 +155,8 @@ require a running Docker-compatible runtime; see [CONTRIBUTING.md](CONTRIBUTING.
 | [`guice`](e2e/smoke/features/guice)                                                         | Guice module bindings imported into Micronaut              |
 | [`hibernate_jpamodelgen`](e2e/smoke/features/hibernate-jpamodelgen)                         | Hibernate's JPA static metamodel                           |
 | [`http`](e2e/smoke/features/http)                                                           | HTTP APIs and compile-time route validation                |
-| [`http_client`](e2e/smoke/features/http-client)                                             | HTTP client APIs and declarative clients; includes `http`  |
+| [`http_client`](e2e/smoke/features/http-client)                                             | Netty HTTP client and declarative clients; includes `http` |
+| [`http_client_jdk`](e2e/smoke/features/http-client-jdk)                                     | JDK HTTP client and declarative clients; includes `http`   |
 | [`jakarta_el`](e2e/smoke/features/jakarta-el)                                               | Jakarta Expression Language                                |
 | [`jax_rs`](e2e/smoke/features/jax-rs)                                                       | Jakarta REST annotations; includes `http`                  |
 | [`json_schema`](e2e/smoke/features/json-schema)                                             | JSON Schema generation, under `META-INF/schemas`           |
@@ -185,7 +185,7 @@ require a running Docker-compatible runtime; see [CONTRIBUTING.md](CONTRIBUTING.
 | [`spring_web`](e2e/smoke/features/spring-web)                                               | Spring Web routes; includes `spring`                       |
 | [`tracing_opentelemetry_annotations`](e2e/smoke/features/tracing-opentelemetry-annotations) | OpenTelemetry span annotations                             |
 | [`validation`](e2e/smoke/features/validation)                                               | Bean validation                                            |
-| [`websocket`](e2e/smoke/features/websocket)                                                 | WebSocket clients and servers; includes `http_client`      |
+| [`websocket`](e2e/smoke/features/websocket)                                                 | WebSocket APIs and processing; includes `http`             |
 
 Your Maven resolution must contain the artifacts of every feature you select,
 including the features it includes. [features.bzl](micronaut/private/features.bzl)
@@ -196,8 +196,9 @@ lists them per feature and per server. Artifacts can be declared directly in
 A few artifacts are not managed by the platform BOM and need an explicit version;
 the [example module](e2e/smoke/MODULE.bazel) has working versions for all of them.
 
-Features supply code generation and APIs, not interchangeable implementations.
-Choose those in the `runtime_deps` of the application or test:
+Features supply code generation and APIs. Client and serialization variants also
+select their named implementation. Choose other runtime dependencies in the
+application or test's `runtime_deps`:
 
 - **Serialization:** compile with `serialization`, then run with
   `serialization_jackson`, `serialization_bson` or `serialization_jsonp`.
@@ -207,11 +208,13 @@ Choose those in the `runtime_deps` of the application or test:
   `@maven//:io_micronaut_sql_micronaut_jdbc_hikari` and `@maven//:com_h2database_h2`.
 - **Caching:** a backend such as `@maven//:io_micronaut_cache_micronaut_cache_caffeine`.
 
-HTTP clients, including declarative `@Client` interfaces, use
-`@micronaut//:http_client` in `deps`. This includes `http` and exports the client
-API without selecting a transport. Add an implementation, such as
-`@maven//:io_micronaut_micronaut_http_client` for Netty, to the application or
-test's `runtime_deps`. The implementation must be present in your Maven resolution.
+HTTP client feature names follow the Starter catalogue, with hyphens replaced by
+underscores: `@micronaut//:http_client` selects the Netty client and
+`@micronaut//:http_client_jdk` selects the JDK client. Both include `http` and
+support declarative `@Client` interfaces. Add the selected feature to `deps`;
+no separate client implementation is needed in `runtime_deps`. Include
+`io.micronaut:micronaut-http-client` or `io.micronaut:micronaut-http-client-jdk`,
+respectively, in your Maven resolution.
 
 ## Servers
 
@@ -231,7 +234,8 @@ the `deps` of targets compiling servlet sources.
 - **`security_jwt`:** configure bearer authentication and signing or validation keys.
   The smoke test uses a test-only signing secret; applications supply their own.
 - **`websocket`:** select a WebSocket-capable server and client transport, such as
-  Netty, and a JSON mapper in `runtime_deps`. The feature supplies the APIs.
+  `runtime = "netty"` and `@micronaut//:http_client`, plus a JSON mapper in
+  `runtime_deps`. The feature supplies the APIs and processing.
 - **`data_hibernate_reactive`:** set `jpa.default.reactive=true`, add a Vert.x
   SQL client, and add `@maven//:io_projectreactor_reactor_core` to `deps` when
   using Reactor types.

@@ -11,7 +11,6 @@ micronaut_test(
     srcs = ["src/test/java/com/example/httpclient/HttpClientTest.java"],
     runtime_deps = [
         "//features/http",
-        "@maven//:io_micronaut_micronaut_http_client",
         "@micronaut//:serialization_jackson",
     ],
     deps = [

@@ -12,7 +12,6 @@ micronaut_test(
     name = "ManagementTest",
     srcs = ["src/test/java/com/example/management/ManagementTest.java"],
     runtime_deps = [
-        "@maven//:io_micronaut_micronaut_http_client",
         "@micronaut//:serialization_jackson",
     ],
     deps = [

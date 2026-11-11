@@ -13,7 +13,6 @@ micronaut_test(
     name = "SecurityJwtTest",
     srcs = ["src/test/java/com/example/securityjwt/SecurityJwtTest.java"],
     runtime_deps = [
-        "@maven//:io_micronaut_micronaut_http_client",
         "@micronaut//:serialization_jackson",
     ],
     deps = [

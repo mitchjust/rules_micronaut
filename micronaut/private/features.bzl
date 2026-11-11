@@ -155,8 +155,18 @@ FEATURES = {
     ),
     "http_client": _feature(
         includes = ["http"],
-        # Applications choose their client implementation in runtime_deps.
-        api = ["io.micronaut:micronaut-http-client-core"],
+        # Match Starter's http-client feature, which selects the Netty client.
+        api = [
+            "io.micronaut:micronaut-http-client-core",
+            "io.micronaut:micronaut-http-client",
+        ],
+    ),
+    "http_client_jdk": _feature(
+        includes = ["http"],
+        api = [
+            "io.micronaut:micronaut-http-client-core",
+            "io.micronaut:micronaut-http-client-jdk",
+        ],
     ),
     "jakarta_el": _feature(
         api = [
@@ -335,8 +345,9 @@ FEATURES = {
         runtime = [],
     ),
     "websocket": _feature(
-        includes = ["http_client"],
+        includes = ["http"],
         api = [
+            "io.micronaut:micronaut-http-client-core",
             "io.micronaut:micronaut-websocket",
             "org.reactivestreams:reactive-streams",
         ],

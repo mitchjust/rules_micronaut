@@ -92,6 +92,7 @@
     "io.micronaut:micronaut-http": 2129913941,
     "io.micronaut:micronaut-http-client": -1994917063,
     "io.micronaut:micronaut-http-client-core": -705215127,
+    "io.micronaut:micronaut-http-client-jdk": -2040979107,
     "io.micronaut:micronaut-http-server": -51324239,
     "io.micronaut:micronaut-http-server-netty": -1917859706,
     "io.micronaut:micronaut-http-validation": -1827338393,
@@ -351,6 +352,7 @@
     "io.micronaut:micronaut-http": -467275022,
     "io.micronaut:micronaut-http-client": -1157999375,
     "io.micronaut:micronaut-http-client-core": 1649801744,
+    "io.micronaut:micronaut-http-client-jdk": 1923678413,
     "io.micronaut:micronaut-http-netty": 1093134967,
     "io.micronaut:micronaut-http-server": -883776954,
     "io.micronaut:micronaut-http-server-netty": -626284351,
@@ -1734,6 +1736,12 @@
     "io.micronaut:micronaut-http-client-core": {
       "shasums": {
         "jar": "20caf3df39dcc01ea6da30700a967c1d67fef19fba0b786ec56b929df4df0e51"
+      },
+      "version": "5.2.22"
+    },
+    "io.micronaut:micronaut-http-client-jdk": {
+      "shasums": {
+        "jar": "d549dd90a68d2adc01b9edf99b2f44e4779eca107df9c5851d6cc7c462c893d7"
       },
       "version": "5.2.22"
     },
@@ -4010,6 +4018,11 @@
       "io.micronaut:micronaut-discovery-core",
       "io.micronaut:micronaut-http",
       "io.micronaut:micronaut-json-core",
+      "io.projectreactor:reactor-core",
+      "org.slf4j:slf4j-api"
+    ],
+    "io.micronaut:micronaut-http-client-jdk": [
+      "io.micronaut:micronaut-http-client-core",
       "io.projectreactor:reactor-core",
       "org.slf4j:slf4j-api"
     ],
@@ -6745,6 +6758,10 @@
       "io.micronaut.http.client.loadbalance",
       "io.micronaut.http.client.multipart",
       "io.micronaut.http.client.sse"
+    ],
+    "io.micronaut:micronaut-http-client-jdk": [
+      "io.micronaut.http.client.jdk",
+      "io.micronaut.http.client.jdk.cookie"
     ],
     "io.micronaut:micronaut-http-netty": [
       "io.micronaut.http.netty",
@@ -10247,6 +10264,7 @@
       "io.micronaut:micronaut-http",
       "io.micronaut:micronaut-http-client",
       "io.micronaut:micronaut-http-client-core",
+      "io.micronaut:micronaut-http-client-jdk",
       "io.micronaut:micronaut-http-netty",
       "io.micronaut:micronaut-http-server",
       "io.micronaut:micronaut-http-server-netty",
@@ -11209,6 +11227,14 @@
     "io.micronaut:micronaut-http-client-core": {
       "io.micronaut.core.convert.TypeConverterRegistrar": [
         "io.micronaut.http.client.loadbalance.LoadBalancerConverters"
+      ]
+    },
+    "io.micronaut:micronaut-http-client-jdk": {
+      "io.micronaut.http.client.HttpClientFactory": [
+        "io.micronaut.http.client.jdk.JdkHttpClientFactory"
+      ],
+      "io.micronaut.http.client.RawHttpClientFactory": [
+        "io.micronaut.http.client.jdk.JdkHttpClientFactory"
       ]
     },
     "io.micronaut:micronaut-http-netty": {

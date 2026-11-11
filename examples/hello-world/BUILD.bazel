@@ -30,7 +30,6 @@ micronaut_test(
     srcs = ["src/test/java/com/example/BookControllerTest.java"],
     runtime_deps = [
         "@maven//:com_h2database_h2",
-        "@maven//:io_micronaut_micronaut_http_client",
         "@maven//:io_micronaut_sql_micronaut_jdbc_hikari",
         "@maven//:org_yaml_snakeyaml",
         "@micronaut//:serialization_jackson",

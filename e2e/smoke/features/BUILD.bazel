@@ -16,6 +16,7 @@ test_suite(
         "//features/hibernate-jpamodelgen:tests",
         "//features/http:tests",
         "//features/http-client:tests",
+        "//features/http-client-jdk:tests",
         "//features/jakarta-el:tests",
         "//features/jax-rs:tests",
         "//features/json-schema:tests",
