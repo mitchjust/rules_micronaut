@@ -184,6 +184,11 @@ FEATURES = {
         ],
         processors = ["io.micronaut.langchain4j:micronaut-langchain4j-processor"],
     ),
+    "lombok": _feature(
+        # Processing is opt-in through @micronaut//:lombok_processor in plugins,
+        # so it runs before Micronaut's exported processors.
+        compile_only = ["org.projectlombok:lombok"],
+    ),
     "micrometer_annotation": _feature(
         api = ["io.micrometer:micrometer-core", "io.micronaut.micrometer:micronaut-micrometer-core"],
         processors = ["io.micronaut.micrometer:micronaut-micrometer-annotation"],

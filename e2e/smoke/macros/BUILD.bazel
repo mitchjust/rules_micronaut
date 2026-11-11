@@ -3,6 +3,7 @@ load("@rules_micronaut//micronaut:defs.bzl", "micronaut_application", "micronaut
 # Source-free resources and exports must not acquire compile dependencies.
 micronaut_library(
     name = "resources",
+    export_full_jar = True,
     resource_strip_prefix = "macros/resources",
     resources = ["resources/library.txt"],
     runtime_deps = ["@micronaut//:core_runtime"],
@@ -22,6 +23,7 @@ micronaut_library(
 
 micronaut_library(
     name = "exported",
+    export_full_jar = True,
     visibility = ["//macros:__subpackages__"],
     exports = [":library"],
 )
@@ -59,6 +61,7 @@ _LIBRARY_DEPS = select({
 micronaut_library(
     name = "library_select",
     srcs = ["src/main/java/com/example/macros/Greeting.java"],
+    export_full_jar = True,
     visibility = ["//macros:__subpackages__"],
     runtime_deps = _LIBRARY_DEPS + ["@micronaut//:core_runtime"],
     deps = _LIBRARY_DEPS,

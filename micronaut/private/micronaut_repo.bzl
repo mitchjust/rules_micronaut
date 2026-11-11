@@ -60,7 +60,7 @@ def _java_library(name, exports = [], runtime_deps = [], exported_plugins = [], 
     return "\n".join(lines) + "\n"
 
 def _target_names():
-    return (["core", "core_runtime", "processors", "test_junit5"] +
+    return (["core", "core_runtime", "processors", "test_junit5", "lombok_processor"] +
             ["runtime_" + r for r in RUNTIMES] +
             [f for f in FEATURES if f != "core"] +
             ["_macro_" + name for name in _MACRO_TARGETS])
@@ -165,6 +165,18 @@ java_plugin(
             runtime_deps = _labels(repo, feature.runtime),
             exported_plugins = plugins,
         ))
+
+    # Lombok must precede Micronaut's exported processors. Keep it separate from
+    # the annotation dependency and require explicit placement in plugins.
+    # It modifies javac's AST and cannot run in Turbine header compilation.
+    out.append("""\
+java_plugin(
+    name = "lombok_processor",
+    processor_class = "lombok.launch.AnnotationProcessorHider$AnnotationProcessor",
+    generates_api = False,
+    deps = %s,
+)
+""" % _fmt(_labels(repo, FEATURES["lombok"].compile_only)))
 
     for runtime, coordinates in RUNTIMES.items():
         out.append(_java_library("runtime_" + runtime, runtime_deps = _labels(repo, coordinates)))

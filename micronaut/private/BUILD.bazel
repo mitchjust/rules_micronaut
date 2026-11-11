@@ -29,7 +29,10 @@ bzl_library(
     name = "full_jar_deps",
     srcs = ["full_jar_deps.bzl"],
     visibility = ["//micronaut:__subpackages__"],
-    deps = ["@rules_java//java/common"],
+    deps = [
+        "@rules_java//java/common",
+        "@rules_java//java/common:proguard_spec_info_bzl",
+    ],
 )
 
 bzl_library(
@@ -44,6 +47,7 @@ bzl_library(
     visibility = ["//micronaut:__subpackages__"],
     deps = [
         ":common",
+        ":full_jar_deps",
         "@rules_java//java:rules",
     ],
 )

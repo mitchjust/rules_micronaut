@@ -149,6 +149,8 @@ maven.install(
         "jakarta.el:jakarta.el-api",
         "io.micronaut.multitenancy:micronaut-multitenancy",
         "io.micronaut.multitenancy:micronaut-multitenancy-annotations",
+        # Lombok annotations and processor.
+        "org.projectlombok:lombok",
         # logging API for libraries
         "org.slf4j:slf4j-api",
         # optional application/test runtime support

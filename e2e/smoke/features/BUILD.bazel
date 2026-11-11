@@ -20,6 +20,7 @@ test_suite(
         "//features/jax-rs:tests",
         "//features/json-schema:tests",
         "//features/langchain4j:tests",
+        "//features/lombok:tests",
         "//features/micrometer-annotation:tests",
         "//features/multi-tenancy:tests",
         "//features/openapi:tests",

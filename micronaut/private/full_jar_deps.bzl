@@ -18,16 +18,42 @@ need no wrapping.
 
 load("@rules_java//java/common:java_common.bzl", "java_common")
 load("@rules_java//java/common:java_info.bzl", "JavaInfo")
+load("@rules_java//java/common:proguard_spec_info.bzl", "ProguardSpecInfo")
 
-def _micronaut_full_jar_deps_impl(ctx):
-    deps = java_common.merge([dep[JavaInfo] for dep in ctx.attr.deps])
+def _full_jar_info(infos):
+    deps = java_common.merge(infos)
     full = [
         JavaInfo(output_jar = jar, compile_jar = jar, neverlink = True)
         for jar in deps.full_compile_jars.to_list()
     ]
 
     # javac resolves a class from its first classpath entry.
-    return [java_common.merge(full + [deps])]
+    return java_common.merge(full + [deps])
+
+def _micronaut_full_jar_deps_impl(ctx):
+    return [_full_jar_info([dep[JavaInfo] for dep in ctx.attr.deps])]
+
+def _full_jar_library_impl(ctx):
+    actual = ctx.attr.actual
+    providers = [
+        _full_jar_info([actual[JavaInfo]]),
+        actual[DefaultInfo],
+        coverage_common.instrumented_files_info(ctx, dependency_attributes = ["actual"]),
+    ]
+    for provider in [OutputGroupInfo, ProguardSpecInfo]:
+        if provider in actual:
+            providers.append(actual[provider])
+    return providers
+
+# The public target of micronaut_library(export_full_jar = True). Unlike a dependency
+# bundle, it also preserves the underlying library's outputs and runfiles.
+full_jar_library = rule(
+    implementation = _full_jar_library_impl,
+    attrs = {
+        "actual": attr.label(mandatory = True, providers = [JavaInfo]),
+    },
+    provides = [JavaInfo],
+)
 
 micronaut_full_jar_deps = rule(
     implementation = _micronaut_full_jar_deps_impl,

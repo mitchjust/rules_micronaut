@@ -1,0 +1,30 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "lombok",
+    srcs = ["src/main/java/com/example/lombok/Message.java"],
+    export_full_jar = True,
+    # Explicit plugins precede processors exported by deps, including Micronaut.
+    plugins = ["@micronaut//:lombok_processor"],
+    deps = [
+        "@micronaut//:lombok",
+        "@micronaut//:serialization",
+    ],
+)
+
+micronaut_test(
+    name = "LombokTest",
+    srcs = ["src/test/java/com/example/lombok/LombokTest.java"],
+    runtime = "none",
+    runtime_deps = ["@micronaut//:serialization_jackson"],
+    deps = [
+        ":lombok",
+        "@micronaut//:serialization",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":LombokTest"],
+    visibility = ["//features:__pkg__"],
+)
