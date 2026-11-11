@@ -1,18 +1,13 @@
-load("@rules_micronaut//micronaut:defs.bzl", "micronaut_full_jar_deps", "micronaut_library", "micronaut_test")
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
 
 micronaut_library(
     name = "hibernate-jpamodelgen",
     srcs = glob(["src/main/java/**/*.java"]),
+    # Hibernate's processor cannot run in header compilation.
+    export_full_jar = True,
     deps = [
         "@micronaut//:hibernate_jpamodelgen",
     ],
-)
-
-# Hibernate's processor cannot run in header compilation, so the metamodel is
-# only in the full jar.
-micronaut_full_jar_deps(
-    name = "metamodel",
-    deps = [":hibernate-jpamodelgen"],
 )
 
 micronaut_test(
@@ -20,7 +15,7 @@ micronaut_test(
     srcs = ["src/test/java/com/example/hibernatejpamodelgen/HibernateMetamodelTest.java"],
     runtime = "none",
     deps = [
-        ":metamodel",
+        ":hibernate-jpamodelgen",
         "@micronaut//:hibernate_jpamodelgen",
     ],
 )

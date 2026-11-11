@@ -24,6 +24,8 @@ bazel test //...                     # Rule unit tests and API documentation
 ```
 
 The example's tests use an in-memory H2 database, so Docker is not required.
+The smoke suite's MongoDB and Hibernate Reactive tests use Testcontainers and
+require a running Docker-compatible container runtime.
 
 CI also repeats the smoke suite with `rules_java` forced to the minimum declared
 in the root `MODULE.bazel`. This prevents transitive dependencies from silently
@@ -42,13 +44,15 @@ When adding tests:
 
 - Compile the library and its consumer as separate targets, so generated types
   and metadata are exercised across Bazel targets.
-- Prefer a test that runs. Use `build_test` only when a feature needs external
-  infrastructure; it checks processor wiring, not runtime behaviour.
+- Prefer a test that runs. Use `build_test` only when a feature's infrastructure
+  cannot be provided by a test fixture; it checks processor wiring, not runtime
+  behaviour.
 - A `build_test` that names generated implementation classes, such as
-  `BookRepository$Intercepted`, depends on the library through
-  `micronaut_full_jar_deps`. Do not set `generates_api` on a feature to make such a
-  test compile.
-- Keep tests self-contained, with in-memory backends or temporary storage.
+  `BookRepository$Intercepted`, needs `export_full_jar = True` on the library.
+  Use `micronaut_full_jar_deps` when only particular consumers should opt in.
+  Do not set `generates_api` on a feature to make such a test compile.
+- Keep tests self-contained, with in-memory backends, temporary storage, or
+  Testcontainers for databases that cannot run in memory.
 
 After changing Maven artifacts or the platform BOM, repin and commit both
 lockfiles:
