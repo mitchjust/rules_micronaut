@@ -82,8 +82,9 @@ public class PrivateInjectionChecker extends AbstractProcessor {
                     + " other targets compile against a header jar without private methods, so"
                     + " Micronaut never calls it for them. Make it package-private or protected,"
                     + " or make the class final. To keep it private, add"
-                    + " @SuppressWarnings(\"%s\") and wrap this target in"
-                    + " micronaut_full_jar_deps wherever the class is subclassed.",
+                    + " @SuppressWarnings(\"%s\") and either set export_full_jar = True on this"
+                    + " micronaut_library, or use micronaut_full_jar_deps wherever the class is"
+                    + " subclassed.",
                 SUPPRESSION,
                 annotation.getSimpleName(),
                 element.getSimpleName(),

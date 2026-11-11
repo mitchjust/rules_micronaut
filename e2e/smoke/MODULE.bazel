@@ -132,13 +132,19 @@ maven.install(
         "jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0",
         # The BOM manages the old hibernate-jpamodelgen coordinate, now relocated.
         "org.hibernate.orm:hibernate-processor:7.4.10.Final",
-        # Features covered by compile-only examples; no database/cloud fixtures.
+        # Additional data, expression and multitenancy features.
         "io.micronaut.data:micronaut-data-document-model",
         "io.micronaut.data:micronaut-data-document-processor",
         "io.micronaut.data:micronaut-data-mongodb",
+        "org.mongodb:mongodb-driver-sync",
+        # Real databases for repository smoke tests; versions come from the BOM.
+        "org.testcontainers:testcontainers-mongodb",
+        "org.testcontainers:testcontainers-postgresql",
+        "org.testcontainers:testcontainers-junit-jupiter",
         "io.micronaut.data:micronaut-data-azure-cosmos",
         "io.micronaut.data:micronaut-data-jpa-metamodel-processor",
         "io.micronaut.data:micronaut-data-hibernate-reactive",
+        "io.vertx:vertx-pg-client",
         "io.micronaut.data:micronaut-data-spring-jdbc",
         "org.springframework:spring-jdbc",
         # Not managed by the BOM; matches micronaut-data-spring-jdbc.

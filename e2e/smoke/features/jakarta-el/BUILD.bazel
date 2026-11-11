@@ -1,27 +1,23 @@
-load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library")
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
 
 micronaut_library(
     name = "jakarta-el",
-    srcs = glob(
-        ["src/main/java/**/*.java"],
-        exclude = ["src/main/java/com/example/jakartael/GeneratedTypes.java"],
-    ),
+    srcs = glob(["src/main/java/**/*.java"]),
     deps = ["@micronaut//:jakarta_el"],
 )
 
-# Compile a separate consumer so missing processor output fails the build.
-micronaut_library(
-    name = "generated-code",
-    srcs = ["src/main/java/com/example/jakartael/GeneratedTypes.java"],
+micronaut_test(
+    name = "JakartaElTest",
+    srcs = ["src/test/java/com/example/jakartael/JakartaElTest.java"],
+    runtime = "none",
     deps = [
         ":jakarta-el",
         "@micronaut//:jakarta_el",
     ],
 )
 
-build_test(
+test_suite(
     name = "tests",
-    targets = [":generated-code"],
+    tests = [":JakartaElTest"],
     visibility = ["//features:__pkg__"],
 )

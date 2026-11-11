@@ -1,27 +1,23 @@
-load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library")
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
 
 micronaut_library(
     name = "data-jpa-metamodel",
-    srcs = glob(
-        ["src/main/java/**/*.java"],
-        exclude = ["src/main/java/com/example/datajpametamodel/GeneratedTypes.java"],
-    ),
+    srcs = glob(["src/main/java/**/*.java"]),
     deps = ["@micronaut//:data_jpa_metamodel"],
 )
 
-# Compile a separate consumer so missing processor output fails the build.
-micronaut_library(
-    name = "generated-code",
-    srcs = ["src/main/java/com/example/datajpametamodel/GeneratedTypes.java"],
+micronaut_test(
+    name = "JpaMetamodelTest",
+    srcs = ["src/test/java/com/example/datajpametamodel/JpaMetamodelTest.java"],
+    runtime = "none",
     deps = [
         ":data-jpa-metamodel",
         "@micronaut//:data_jpa_metamodel",
     ],
 )
 
-build_test(
+test_suite(
     name = "tests",
-    targets = [":generated-code"],
+    tests = [":JpaMetamodelTest"],
     visibility = ["//features:__pkg__"],
 )
