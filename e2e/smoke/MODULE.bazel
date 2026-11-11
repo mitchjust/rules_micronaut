@@ -143,6 +143,7 @@ maven.install(
         "io.micronaut.data:micronaut-data-mongodb",
         "org.mongodb:mongodb-driver-sync",
         # Real databases for repository smoke tests; versions come from the BOM.
+        "org.testcontainers:testcontainers-azure",
         "org.testcontainers:testcontainers-mongodb",
         "org.testcontainers:testcontainers-postgresql",
         "org.testcontainers:testcontainers-junit-jupiter",

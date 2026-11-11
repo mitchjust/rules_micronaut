@@ -138,6 +138,7 @@
     "org.springframework:spring-core": 828592846,
     "org.springframework:spring-jdbc": 1068649970,
     "org.springframework:spring-web": -1196164797,
+    "org.testcontainers:testcontainers-azure": 330580732,
     "org.testcontainers:testcontainers-junit-jupiter": -918230293,
     "org.testcontainers:testcontainers-kafka": -1796937005,
     "org.testcontainers:testcontainers-mongodb": 1046703263,
@@ -534,11 +535,13 @@
     "org.springframework:spring-tx": 1695072747,
     "org.springframework:spring-web": -429081307,
     "org.testcontainers:testcontainers": 1625232786,
+    "org.testcontainers:testcontainers-azure": -846344404,
     "org.testcontainers:testcontainers-database-commons": 2131696717,
     "org.testcontainers:testcontainers-jdbc": -375925443,
     "org.testcontainers:testcontainers-junit-jupiter": 276011375,
     "org.testcontainers:testcontainers-kafka": -678356138,
     "org.testcontainers:testcontainers-mongodb": -1072274279,
+    "org.testcontainers:testcontainers-mssqlserver": 2048523721,
     "org.testcontainers:testcontainers-postgresql": -805991591,
     "org.wildfly.client:wildfly-client-config": 1701176345,
     "org.wildfly.common:wildfly-common": -380690923,
@@ -2852,6 +2855,12 @@
       },
       "version": "2.0.5"
     },
+    "org.testcontainers:testcontainers-azure": {
+      "shasums": {
+        "jar": "16af8131253716b3b5684b32a5fb089ba542c467f060fd884ec9abaa23b25568"
+      },
+      "version": "2.0.5"
+    },
     "org.testcontainers:testcontainers-database-commons": {
       "shasums": {
         "jar": "0ebbc62bdcfb315cb840a63fbaa148b455927666d9034b5e5c00009d84c755b0"
@@ -2879,6 +2888,12 @@
     "org.testcontainers:testcontainers-mongodb": {
       "shasums": {
         "jar": "f47872c03f72b3e70fd277b31f6ce4535ff2ee04c62bdc9cb4ffeb61153a8552"
+      },
+      "version": "2.0.5"
+    },
+    "org.testcontainers:testcontainers-mssqlserver": {
+      "shasums": {
+        "jar": "323141d0769f8645ce9df5ae21f1ec5ef2cf074b2414b4df16cfe7e1084bcf5d"
       },
       "version": "2.0.5"
     },
@@ -4640,6 +4655,10 @@
       "org.rnorth.duct-tape:duct-tape",
       "org.slf4j:slf4j-api"
     ],
+    "org.testcontainers:testcontainers-azure": [
+      "org.testcontainers:testcontainers",
+      "org.testcontainers:testcontainers-mssqlserver"
+    ],
     "org.testcontainers:testcontainers-database-commons": [
       "org.testcontainers:testcontainers"
     ],
@@ -4654,6 +4673,9 @@
     ],
     "org.testcontainers:testcontainers-mongodb": [
       "org.testcontainers:testcontainers"
+    ],
+    "org.testcontainers:testcontainers-mssqlserver": [
+      "org.testcontainers:testcontainers-jdbc"
     ],
     "org.testcontainers:testcontainers-postgresql": [
       "org.testcontainers:testcontainers-jdbc"
@@ -9616,6 +9638,79 @@
       "org.testcontainers.shaded.org.zeroturnaround.exec.stream.slf4j",
       "org.testcontainers.utility"
     ],
+    "org.testcontainers:testcontainers-azure": [
+      "org.testcontainers.azure",
+      "org.testcontainers.containers",
+      "org.testcontainers.shaded.kotlin",
+      "org.testcontainers.shaded.kotlin.annotation",
+      "org.testcontainers.shaded.kotlin.collections",
+      "org.testcontainers.shaded.kotlin.collections.builders",
+      "org.testcontainers.shaded.kotlin.collections.jdk8",
+      "org.testcontainers.shaded.kotlin.collections.unsigned",
+      "org.testcontainers.shaded.kotlin.comparisons",
+      "org.testcontainers.shaded.kotlin.concurrent",
+      "org.testcontainers.shaded.kotlin.concurrent.atomics",
+      "org.testcontainers.shaded.kotlin.concurrent.internal",
+      "org.testcontainers.shaded.kotlin.contracts",
+      "org.testcontainers.shaded.kotlin.coroutines",
+      "org.testcontainers.shaded.kotlin.coroutines.cancellation",
+      "org.testcontainers.shaded.kotlin.coroutines.intrinsics",
+      "org.testcontainers.shaded.kotlin.coroutines.jvm.internal",
+      "org.testcontainers.shaded.kotlin.enums",
+      "org.testcontainers.shaded.kotlin.experimental",
+      "org.testcontainers.shaded.kotlin.internal",
+      "org.testcontainers.shaded.kotlin.internal.jdk7",
+      "org.testcontainers.shaded.kotlin.internal.jdk8",
+      "org.testcontainers.shaded.kotlin.io",
+      "org.testcontainers.shaded.kotlin.io.encoding",
+      "org.testcontainers.shaded.kotlin.io.path",
+      "org.testcontainers.shaded.kotlin.jdk7",
+      "org.testcontainers.shaded.kotlin.js",
+      "org.testcontainers.shaded.kotlin.jvm",
+      "org.testcontainers.shaded.kotlin.jvm.functions",
+      "org.testcontainers.shaded.kotlin.jvm.internal",
+      "org.testcontainers.shaded.kotlin.jvm.internal.markers",
+      "org.testcontainers.shaded.kotlin.jvm.internal.unsafe",
+      "org.testcontainers.shaded.kotlin.jvm.jdk8",
+      "org.testcontainers.shaded.kotlin.jvm.optionals",
+      "org.testcontainers.shaded.kotlin.math",
+      "org.testcontainers.shaded.kotlin.properties",
+      "org.testcontainers.shaded.kotlin.random",
+      "org.testcontainers.shaded.kotlin.random.jdk8",
+      "org.testcontainers.shaded.kotlin.ranges",
+      "org.testcontainers.shaded.kotlin.reflect",
+      "org.testcontainers.shaded.kotlin.sequences",
+      "org.testcontainers.shaded.kotlin.streams.jdk8",
+      "org.testcontainers.shaded.kotlin.system",
+      "org.testcontainers.shaded.kotlin.text",
+      "org.testcontainers.shaded.kotlin.text.jdk8",
+      "org.testcontainers.shaded.kotlin.time",
+      "org.testcontainers.shaded.kotlin.time.jdk8",
+      "org.testcontainers.shaded.kotlin.uuid",
+      "org.testcontainers.shaded.okhttp3",
+      "org.testcontainers.shaded.okhttp3.internal",
+      "org.testcontainers.shaded.okhttp3.internal.authenticator",
+      "org.testcontainers.shaded.okhttp3.internal.cache",
+      "org.testcontainers.shaded.okhttp3.internal.cache2",
+      "org.testcontainers.shaded.okhttp3.internal.concurrent",
+      "org.testcontainers.shaded.okhttp3.internal.connection",
+      "org.testcontainers.shaded.okhttp3.internal.graal",
+      "org.testcontainers.shaded.okhttp3.internal.http",
+      "org.testcontainers.shaded.okhttp3.internal.http1",
+      "org.testcontainers.shaded.okhttp3.internal.http2",
+      "org.testcontainers.shaded.okhttp3.internal.http2.flowcontrol",
+      "org.testcontainers.shaded.okhttp3.internal.idn",
+      "org.testcontainers.shaded.okhttp3.internal.platform",
+      "org.testcontainers.shaded.okhttp3.internal.proxy",
+      "org.testcontainers.shaded.okhttp3.internal.publicsuffix",
+      "org.testcontainers.shaded.okhttp3.internal.tls",
+      "org.testcontainers.shaded.okhttp3.internal.url",
+      "org.testcontainers.shaded.okhttp3.internal.ws",
+      "org.testcontainers.shaded.okio",
+      "org.testcontainers.shaded.okio.internal",
+      "org.testcontainers.shaded.org.intellij.lang.annotations",
+      "org.testcontainers.shaded.org.jetbrains.annotations"
+    ],
     "org.testcontainers:testcontainers-database-commons": [
       "org.testcontainers.delegate",
       "org.testcontainers.exception",
@@ -9636,6 +9731,10 @@
     "org.testcontainers:testcontainers-mongodb": [
       "org.testcontainers.containers",
       "org.testcontainers.mongodb"
+    ],
+    "org.testcontainers:testcontainers-mssqlserver": [
+      "org.testcontainers.containers",
+      "org.testcontainers.mssqlserver"
     ],
     "org.testcontainers:testcontainers-postgresql": [
       "org.testcontainers.containers",
@@ -10146,11 +10245,13 @@
       "org.springframework:spring-tx",
       "org.springframework:spring-web",
       "org.testcontainers:testcontainers",
+      "org.testcontainers:testcontainers-azure",
       "org.testcontainers:testcontainers-database-commons",
       "org.testcontainers:testcontainers-jdbc",
       "org.testcontainers:testcontainers-junit-jupiter",
       "org.testcontainers:testcontainers-kafka",
       "org.testcontainers:testcontainers-mongodb",
+      "org.testcontainers:testcontainers-mssqlserver",
       "org.testcontainers:testcontainers-postgresql",
       "org.wildfly.client:wildfly-client-config",
       "org.wildfly.common:wildfly-common",
@@ -11556,6 +11657,14 @@
     },
     "org.testcontainers:testcontainers-jdbc": {
       "java.sql.Driver": ["org.testcontainers.jdbc.ContainerDatabaseDriver"]
+    },
+    "org.testcontainers:testcontainers-mssqlserver": {
+      "org.testcontainers.containers.JdbcDatabaseContainerProvider": [
+        "org.testcontainers.containers.MSSQLServerContainerProvider"
+      ],
+      "org.testcontainers.r2dbc.R2DBCDatabaseContainerProvider": [
+        "org.testcontainers.containers.MSSQLR2DBCDatabaseContainerProvider"
+      ]
     },
     "org.testcontainers:testcontainers-postgresql": {
       "org.testcontainers.containers.JdbcDatabaseContainerProvider": [
