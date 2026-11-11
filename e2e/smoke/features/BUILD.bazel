@@ -19,6 +19,7 @@ test_suite(
         "//features/jakarta-el:tests",
         "//features/jax-rs:tests",
         "//features/json-schema:tests",
+        "//features/kafka:tests",
         "//features/langchain4j:tests",
         "//features/lombok:tests",
         "//features/micrometer-annotation:tests",

@@ -158,6 +158,7 @@ Each feature is available as `@micronaut//:<name>` and links to an example:
 | [`jakarta_el`](e2e/smoke/features/jakarta-el)                                               | Jakarta Expression Language                                |
 | [`jax_rs`](e2e/smoke/features/jax-rs)                                                       | Jakarta REST annotations; includes `http`                  |
 | [`json_schema`](e2e/smoke/features/json-schema)                                             | JSON Schema generation, under `META-INF/schemas`           |
+| [`kafka`](e2e/smoke/features/kafka)                                                         | Kafka producers, listeners and messaging APIs              |
 | [`langchain4j`](e2e/smoke/features/langchain4j)                                             | LangChain4j AI services                                    |
 | [`lombok`](e2e/smoke/features/lombok)                                                       | Compile-only Lombok annotations; explicit plugin required  |
 | [`micrometer_annotation`](e2e/smoke/features/micrometer-annotation)                         | Micrometer `@Counted` and `@Timed`                         |

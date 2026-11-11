@@ -176,6 +176,14 @@ FEATURES = {
         api = ["io.micronaut.jsonschema:micronaut-json-schema-annotations"],
         processors = ["io.micronaut.jsonschema:micronaut-json-schema-processor"],
     ),
+    "kafka": _feature(
+        # Kafka clients and listeners use core annotation processing and AOP.
+        api = [
+            "io.micronaut.kafka:micronaut-kafka",
+            "io.micronaut:micronaut-messaging",
+            "org.apache.kafka:kafka-clients",
+        ],
+    ),
     "langchain4j": _feature(
         api = [
             "io.micronaut.langchain4j:micronaut-langchain4j-core",

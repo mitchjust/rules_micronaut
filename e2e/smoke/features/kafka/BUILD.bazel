@@ -1,0 +1,26 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "kafka",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = ["@micronaut//:kafka"],
+)
+
+micronaut_test(
+    name = "KafkaTest",
+    srcs = ["src/test/java/com/example/kafka/KafkaTest.java"],
+    runtime = "none",
+    deps = [
+        ":kafka",
+        "@maven//:org_testcontainers_testcontainers",
+        "@maven//:org_testcontainers_testcontainers_junit_jupiter",
+        "@maven//:org_testcontainers_testcontainers_kafka",
+        "@micronaut//:kafka",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":KafkaTest"],
+    visibility = ["//features:__pkg__"],
+)
