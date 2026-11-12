@@ -13,6 +13,7 @@ micronaut_test(
     srcs = ["src/test/java/com/example/LoudGreeterTest.java"],
     runtime = "none",
     test_class = "com.example.LoudGreeterTest",
+    runtime_deps = ["//:test_logging"],
     deps = [":core"],
 )
 
@@ -27,6 +28,7 @@ micronaut_test(
     name = "PrivateMethodTest",
     srcs = ["src/test/java/com/example/PrivateMethodTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [":base_full"],
 )
 
@@ -34,6 +36,7 @@ micronaut_test(
     name = "CrossTargetTest",
     srcs = ["src/test/java/com/example/CrossTargetTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         "//features/core/base",
         "//features/core/plain",
@@ -45,7 +48,10 @@ micronaut_test(
     srcs = ["src/test/java/com/example/ConfigAndAopTest.java"],
     resources = glob(["src/test/resources/**"]),
     runtime = "none",
-    runtime_deps = ["@maven//:org_yaml_snakeyaml"],
+    runtime_deps = [
+        "//:test_logging",
+        "@maven//:org_yaml_snakeyaml",
+    ],
     deps = [":core"],
 )
 
@@ -54,6 +60,8 @@ micronaut_application(
     srcs = ["src/main/java/com/example/core/CoreApplication.java"],
     main_class = "com.example.core.CoreApplication",
     runtime = "none",
+    # Deliberately omit logging: CoreApplication checks that core does not
+    # implicitly bring in a logging backend or other optional features.
 )
 
 micronaut_test(
@@ -62,6 +70,7 @@ micronaut_test(
     data = [":app"],
     jvm_flags = ["-Dfeatures.core_app=$(rlocationpath :app)"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = ["@rules_java//java/runfiles"],
 )
 

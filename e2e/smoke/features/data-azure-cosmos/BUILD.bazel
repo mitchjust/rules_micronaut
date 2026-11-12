@@ -13,7 +13,10 @@ micronaut_test(
     runtime = "none",
     tags = ["requires-docker"],
     # Reactor Netty probes QUIC even in gateway mode; the resolved HTTP/3 closure omits it.
-    runtime_deps = ["@maven//:io_netty_netty_codec_classes_quic"],
+    runtime_deps = [
+        "//:test_logging",
+        "@maven//:io_netty_netty_codec_classes_quic",
+    ],
     deps = [
         ":data-azure-cosmos",
         "@maven//:io_micronaut_micronaut_json_core",

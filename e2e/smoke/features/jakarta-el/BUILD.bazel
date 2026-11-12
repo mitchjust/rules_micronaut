@@ -10,6 +10,7 @@ micronaut_test(
     name = "JakartaElTest",
     srcs = ["src/test/java/com/example/jakartael/JakartaElTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":jakarta-el",
         "@micronaut//:jakarta_el",

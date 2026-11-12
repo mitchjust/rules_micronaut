@@ -12,6 +12,7 @@ micronaut_test(
     name = "RetryTest",
     srcs = ["src/test/java/com/example/retry/RetryTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":retry",
         "@micronaut//:retry",

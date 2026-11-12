@@ -1,0 +1,9 @@
+load("@rules_java//java:java_library.bzl", "java_library")
+
+java_library(
+    name = "logging_config",
+    testonly = True,
+    resource_strip_prefix = "test_support",
+    resources = ["logback.xml"],
+    visibility = ["//visibility:public"],
+)

@@ -14,6 +14,7 @@ micronaut_test(
     name = "OpenApiTest",
     srcs = ["src/test/java/com/example/openapi/OpenApiTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":openapi",
         "@micronaut//:openapi",

@@ -12,6 +12,7 @@ micronaut_test(
     name = "SourcegenTest",
     srcs = ["src/test/java/com/example/sourcegen/SourcegenTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":sourcegen-generator",
         "@micronaut//:sourcegen_generator",

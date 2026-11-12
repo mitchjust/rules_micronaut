@@ -12,6 +12,7 @@ micronaut_test(
     name = "GuiceTest",
     srcs = ["src/test/java/com/example/guice/GuiceTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":guice",
         "@micronaut//:guice",

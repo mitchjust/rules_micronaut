@@ -1,3 +1,4 @@
+load("@rules_java//java:java_library.bzl", "java_library")
 load("@rules_micronaut//micronaut:defs.bzl", "micronaut_application", "micronaut_library", "micronaut_test")
 
 micronaut_library(
@@ -30,6 +31,7 @@ micronaut_test(
     # warns about and future JDKs will block.
     jvm_flags = ["-javaagent:$(rootpath @maven//:org_mockito_mockito_core)"],
     runtime_deps = [
+        "//:test_logging",
         "@micronaut//:serialization_jackson",
     ],
     deps = [
@@ -47,5 +49,16 @@ micronaut_test(
     runtime = "none",
     # Starts the app on a random local port.
     tags = ["requires-network"],
+    runtime_deps = ["//:test_logging"],
     deps = ["@rules_java//java/runfiles"],
+)
+
+java_library(
+    name = "test_logging",
+    testonly = True,
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        "@maven//:ch_qos_logback_logback_classic",
+        "@rules_micronaut//test_support:logging_config",
+    ],
 )

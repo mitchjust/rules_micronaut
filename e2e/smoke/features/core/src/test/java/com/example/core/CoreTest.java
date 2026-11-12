@@ -11,10 +11,12 @@ import org.junit.jupiter.api.Test;
 
 class CoreTest {
   @Test
-  void testRuntimeDoesNotIncludeOptionalSupport() {
+  void testRuntimeIncludesExplicitLoggingButNoOtherOptionalSupport() throws Exception {
     assertThrows(ClassNotFoundException.class, () -> Class.forName("org.yaml.snakeyaml.Yaml"));
-    assertThrows(
-        ClassNotFoundException.class, () -> Class.forName("ch.qos.logback.classic.LoggerContext"));
+    // The test explicitly selects Logback; CoreApplication still checks that core alone does not.
+    Object loggerFactory =
+        Class.forName("org.slf4j.LoggerFactory").getMethod("getILoggerFactory").invoke(null);
+    assertEquals("ch.qos.logback.classic.LoggerContext", loggerFactory.getClass().getName());
   }
 
   @Test

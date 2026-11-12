@@ -10,6 +10,7 @@ micronaut_test(
     name = "HttpClientTest",
     srcs = ["src/test/java/com/example/httpclient/HttpClientTest.java"],
     runtime_deps = [
+        "//:test_logging",
         "//features/http",
         "@micronaut//:serialization_jackson",
     ],

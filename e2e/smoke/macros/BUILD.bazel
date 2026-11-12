@@ -30,6 +30,7 @@ micronaut_library(
 
 micronaut_application(
     name = "inline_app",
+    testonly = True,
     srcs = ["src/main/java/com/example/macros/InlineApplication.java"],
     main_class = "com.example.macros.InlineApplication",
     resource_strip_prefix = "macros/config",
@@ -38,6 +39,7 @@ micronaut_application(
     visibility = ["//macros:__subpackages__"],
     runtime_deps = [
         ":exported",
+        "//:test_logging",
         "@micronaut//:core_runtime",
         "@micronaut//:runtime_none",
     ],
@@ -77,6 +79,7 @@ _APPLICATION_DEPS = select({
 
 micronaut_application(
     name = "inline_app_select",
+    testonly = True,
     srcs = ["src/main/java/com/example/macros/InlineApplication.java"],
     main_class = "com.example.macros.InlineApplication",
     resource_strip_prefix = "macros/config",
@@ -84,6 +87,7 @@ micronaut_application(
     runtime = "none",
     visibility = ["//macros:__subpackages__"],
     runtime_deps = _APPLICATION_DEPS + [
+        "//:test_logging",
         "@micronaut//:core_runtime",
         "@micronaut//:runtime_none",
     ],

@@ -58,6 +58,10 @@ When adding tests:
   `BookRepository$Intercepted`, needs `export_full_jar = True` on the library.
   Use `micronaut_full_jar_deps` when only particular consumers should opt in.
   Do not set `generates_api` on a feature to make such a test compile.
+- Add `//:test_logging` to each Micronaut test's `runtime_deps`. Each test module
+  bundles Logback with the shared `test_support/logback.xml` configuration, which
+  writes warnings and errors to stderr. Subprocess test fixtures need the same
+  runtime dependency.
 - Keep tests self-contained, with in-memory backends, temporary storage, or
   Testcontainers for databases that cannot run in memory.
 

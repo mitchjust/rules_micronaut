@@ -10,6 +10,7 @@ micronaut_test(
     name = "JpaMetamodelTest",
     srcs = ["src/test/java/com/example/datajpametamodel/JpaMetamodelTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":data-jpa-metamodel",
         "@micronaut//:data_jpa_metamodel",

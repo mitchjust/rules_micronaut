@@ -12,6 +12,7 @@ micronaut_test(
     name = "TracingAnnotationsTest",
     srcs = ["src/test/java/com/example/tracingopentelemetryannotations/TracingAnnotationsTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":tracing-opentelemetry-annotations",
         "@maven//:io_opentelemetry_opentelemetry_sdk",

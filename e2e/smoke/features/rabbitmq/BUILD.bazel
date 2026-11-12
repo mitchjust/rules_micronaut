@@ -13,6 +13,7 @@ micronaut_test(
     srcs = ["src/test/java/com/example/rabbitmq/RabbitmqTest.java"],
     runtime = "none",
     tags = ["requires-docker"],
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":rabbitmq",
         "@maven//:org_testcontainers_testcontainers",

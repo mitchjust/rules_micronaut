@@ -11,7 +11,10 @@ micronaut_test(
     srcs = ["src/test/java/com/example/servlet/ServletTest.java"],
     runtime = "jetty",
     test_class = "com.example.servlet.ServletTest",
-    runtime_deps = ["@micronaut//:serialization_jackson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@micronaut//:serialization_jackson",
+    ],
     deps = [
         ":servlet",
         "@maven//:io_micronaut_micronaut_http_server",
@@ -24,7 +27,10 @@ micronaut_test(
     srcs = ["src/test/java/com/example/servlet/ServletTest.java"],
     runtime = "tomcat",
     test_class = "com.example.servlet.ServletTest",
-    runtime_deps = ["@micronaut//:serialization_jackson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@micronaut//:serialization_jackson",
+    ],
     deps = [
         ":servlet",
         "@maven//:io_micronaut_micronaut_http_server",
@@ -37,7 +43,10 @@ micronaut_test(
     srcs = ["src/test/java/com/example/servlet/ServletTest.java"],
     runtime = "undertow",
     test_class = "com.example.servlet.ServletTest",
-    runtime_deps = ["@micronaut//:serialization_jackson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@micronaut//:serialization_jackson",
+    ],
     deps = [
         ":servlet",
         "@maven//:io_micronaut_micronaut_http_server",

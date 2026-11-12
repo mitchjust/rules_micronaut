@@ -12,7 +12,10 @@ micronaut_test(
     name = "SerdeBsonTest",
     srcs = ["src/test/java/com/example/serdebson/SerdeBsonTest.java"],
     runtime = "none",
-    runtime_deps = ["@micronaut//:serialization_bson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@micronaut//:serialization_bson",
+    ],
     deps = [
         ":serialization-bson",
         "//features/serialization",

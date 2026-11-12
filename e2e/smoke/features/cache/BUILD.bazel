@@ -11,7 +11,10 @@ micronaut_test(
     name = "CacheTest",
     srcs = ["src/test/java/com/example/cache/CacheTest.java"],
     runtime = "none",
-    runtime_deps = ["@maven//:io_micronaut_cache_micronaut_cache_caffeine"],
+    runtime_deps = [
+        "//:test_logging",
+        "@maven//:io_micronaut_cache_micronaut_cache_caffeine",
+    ],
     deps = [":cache"],
 )
 

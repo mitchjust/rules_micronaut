@@ -12,6 +12,7 @@ micronaut_test(
     name = "PicocliTest",
     srcs = ["src/test/java/com/example/picocli/PicocliTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":picocli",
         "@micronaut//:picocli",

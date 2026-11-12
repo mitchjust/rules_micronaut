@@ -12,6 +12,7 @@ micronaut_test(
     name = "WebsocketTest",
     srcs = ["src/test/java/com/example/websocket/WebsocketTest.java"],
     runtime_deps = [
+        "//:test_logging",
         "@micronaut//:http_client",
         "@micronaut//:serialization_jackson",
     ],

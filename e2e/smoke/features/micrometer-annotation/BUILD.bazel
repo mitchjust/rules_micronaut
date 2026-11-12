@@ -12,6 +12,7 @@ micronaut_test(
     name = "MicrometerAnnotationsTest",
     srcs = ["src/test/java/com/example/micrometerannotations/MicrometerAnnotationsTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":micrometer-annotation",
         "@micronaut//:micrometer_annotation",

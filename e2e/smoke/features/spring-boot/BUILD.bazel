@@ -12,6 +12,7 @@ micronaut_test(
     name = "SpringBootTest",
     srcs = ["src/test/java/com/example/springboot/SpringBootTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":spring-boot",
         "@micronaut//:spring_boot",

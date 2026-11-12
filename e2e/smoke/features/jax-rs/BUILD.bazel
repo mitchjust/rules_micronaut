@@ -12,7 +12,10 @@ micronaut_test(
     name = "JaxrsTest",
     srcs = ["src/test/java/com/example/jaxrs/JaxrsTest.java"],
     runtime = "netty",
-    runtime_deps = ["@micronaut//:serialization_jackson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@micronaut//:serialization_jackson",
+    ],
     deps = [
         ":jax-rs",
         "@maven//:io_micronaut_micronaut_http_server",

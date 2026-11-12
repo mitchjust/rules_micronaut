@@ -12,6 +12,7 @@ micronaut_test(
     name = "EclipseStoreTest",
     srcs = ["src/test/java/com/example/eclipsestore/EclipseStoreTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":eclipsestore",
         "@micronaut//:eclipsestore",

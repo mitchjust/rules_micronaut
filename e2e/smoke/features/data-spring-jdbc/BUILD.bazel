@@ -11,6 +11,7 @@ micronaut_test(
     srcs = ["src/test/java/com/example/springjdbc/SpringJdbcTest.java"],
     runtime = "none",
     runtime_deps = [
+        "//:test_logging",
         "@maven//:com_h2database_h2",
         "@maven//:io_micronaut_sql_micronaut_jdbc_hikari",
     ],
