@@ -19,7 +19,7 @@ HTTP application with JSON serialization, YAML configuration, Logback and JUnit
 tests:
 
 ```starlark
-bazel_dep(name = "rules_micronaut", version = "0.1.0")
+bazel_dep(name = "rules_micronaut", version = "0.2.2")
 bazel_dep(name = "rules_java", version = "9.3.0")
 bazel_dep(name = "rules_jvm_external", version = "7.2")
 
@@ -225,36 +225,6 @@ present in your Maven resolution.
 Use `runtime = "none"` with `@MicronautTest(startApplication = false)` for tests
 that only need beans. For a servlet server, also add `@micronaut//:servlet` to
 the `deps` of targets compiling servlet sources.
-
-## Feature notes
-
-- **`management`:** select a JSON mapper at runtime for HTTP endpoint responses.
-- **`rabbitmq`:** configure `rabbitmq.uri` and provision queues and exchanges, for
-  example with a `ChannelInitializer` bean as in the smoke test.
-- **`security_jwt`:** configure bearer authentication and signing or validation keys.
-  The smoke test uses a test-only signing secret; applications supply their own.
-- **`websocket`:** select a WebSocket-capable server and client transport, such as
-  `runtime = "netty"` and `@micronaut//:http_client`, plus a JSON mapper in
-  `runtime_deps`. The feature supplies the APIs and processing.
-- **`data_hibernate_reactive`:** set `jpa.default.reactive=true`, add a Vert.x
-  SQL client, and add `@maven//:io_projectreactor_reactor_core` to `deps` when
-  using Reactor types.
-- **`data_spring_jdbc`:** set `datasources.default.transaction-manager=springJdbc`.
-- **`data_jpa_metamodel` and `hibernate_jpamodelgen`:** choose one.
-- **`openapi`:** to document controllers compiled in other libraries, add them
-  to `deps` and name them with `@OpenAPIInclude`.
-- **`openapi_adoc`:** add `javacopts = ["-Amicronaut.openapi.adoc.enabled=true"]`.
-- **`serialization_jsonp`:** `micronaut-serde-jsonp` depends on Parsson. To use
-  another provider, declare the artifact like this instead of listing it in
-  `artifacts`, and add your provider to `maven.install` and `runtime_deps`:
-
-  ```starlark
-  maven.artifact(
-      artifact = "micronaut-serde-jsonp",
-      exclusions = ["org.eclipse.parsson:parsson"],
-      group = "io.micronaut.serde",
-  )
-  ```
 
 ### Lombok
 
