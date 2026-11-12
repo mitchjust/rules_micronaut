@@ -11,6 +11,7 @@ micronaut_test(
     size = "large",
     srcs = ["src/test/java/com/example/dataazurecosmos/CosmosTest.java"],
     runtime = "none",
+    tags = ["requires-docker"],
     # Reactor Netty probes QUIC even in gateway mode; the resolved HTTP/3 closure omits it.
     runtime_deps = ["@maven//:io_netty_netty_codec_classes_quic"],
     deps = [
