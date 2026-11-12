@@ -10,6 +10,7 @@ micronaut_test(
     name = "MongoDbTest",
     srcs = ["src/test/java/com/example/datamongodb/MongoDbTest.java"],
     runtime = "none",
+    tags = ["requires-docker"],
     runtime_deps = ["@maven//:org_mongodb_mongodb_driver_sync"],
     deps = [
         ":data-mongodb",

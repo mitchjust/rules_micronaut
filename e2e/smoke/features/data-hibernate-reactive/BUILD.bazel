@@ -14,6 +14,7 @@ micronaut_test(
     name = "HibernateReactiveTest",
     srcs = ["src/test/java/com/example/hibernatereactive/HibernateReactiveTest.java"],
     runtime = "none",
+    tags = ["requires-docker"],
     runtime_deps = ["@maven//:io_vertx_vertx_pg_client"],
     deps = [
         ":data-hibernate-reactive",
