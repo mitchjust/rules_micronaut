@@ -155,8 +155,18 @@ FEATURES = {
     ),
     "http_client": _feature(
         includes = ["http"],
-        # Applications choose their client implementation in runtime_deps.
-        api = ["io.micronaut:micronaut-http-client-core"],
+        # Match Starter's http-client feature, which selects the Netty client.
+        api = [
+            "io.micronaut:micronaut-http-client-core",
+            "io.micronaut:micronaut-http-client",
+        ],
+    ),
+    "http_client_jdk": _feature(
+        includes = ["http"],
+        api = [
+            "io.micronaut:micronaut-http-client-core",
+            "io.micronaut:micronaut-http-client-jdk",
+        ],
     ),
     "jakarta_el": _feature(
         api = [
@@ -197,6 +207,10 @@ FEATURES = {
         # so it runs before Micronaut's exported processors.
         compile_only = ["org.projectlombok:lombok"],
     ),
+    "management": _feature(
+        includes = ["http"],
+        api = ["io.micronaut:micronaut-management"],
+    ),
     "micrometer_annotation": _feature(
         api = ["io.micrometer:micrometer-core", "io.micronaut.micrometer:micronaut-micrometer-core"],
         processors = ["io.micronaut.micrometer:micronaut-micrometer-annotation"],
@@ -232,6 +246,18 @@ FEATURES = {
         processors = ["info.picocli:picocli-codegen"],
         processor_classes = ["picocli.codegen.aot.graalvm.processor.NativeImageConfigGeneratorProcessor"],
     ),
+    "rabbitmq": _feature(
+        api = [
+            "io.micronaut.rabbitmq:micronaut-rabbitmq",
+            "io.micronaut:micronaut-messaging",
+            "com.rabbitmq:amqp-client",
+            # Processing ChannelInitializer subclasses inspects its logger field.
+            "org.slf4j:slf4j-api",
+        ],
+    ),
+    "retry": _feature(
+        api = ["io.micronaut:micronaut-retry"],
+    ),
     "security": _feature(
         api = [
             "io.micronaut.security:micronaut-security",
@@ -240,6 +266,13 @@ FEATURES = {
         ],
         processors = ["io.micronaut.security:micronaut-security-processor"],
         runtime = [],
+    ),
+    "security_jwt": _feature(
+        includes = ["security"],
+        api = [
+            "io.micronaut.security:micronaut-security-jwt",
+            "com.nimbusds:nimbus-jose-jwt",
+        ],
     ),
     "serialization": _feature(
         api = ["io.micronaut.serde:micronaut-serde-api"],
@@ -310,6 +343,14 @@ FEATURES = {
         ],
         processors = ["io.micronaut.validation:micronaut-validation-processor"],
         runtime = [],
+    ),
+    "websocket": _feature(
+        includes = ["http"],
+        api = [
+            "io.micronaut:micronaut-http-client-core",
+            "io.micronaut:micronaut-websocket",
+            "org.reactivestreams:reactive-streams",
+        ],
     ),
 }
 

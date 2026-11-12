@@ -1,0 +1,29 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "security-jwt",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:http",
+        "@micronaut//:security_jwt",
+    ],
+)
+
+micronaut_test(
+    name = "SecurityJwtTest",
+    srcs = ["src/test/java/com/example/securityjwt/SecurityJwtTest.java"],
+    runtime_deps = [
+        "@micronaut//:serialization_jackson",
+    ],
+    deps = [
+        ":security-jwt",
+        "@micronaut//:http_client",
+        "@micronaut//:security_jwt",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":SecurityJwtTest"],
+    visibility = ["//features:__pkg__"],
+)

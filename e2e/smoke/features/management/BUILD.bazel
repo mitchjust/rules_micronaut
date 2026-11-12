@@ -1,0 +1,28 @@
+load("@rules_micronaut//micronaut:defs.bzl", "micronaut_library", "micronaut_test")
+
+micronaut_library(
+    name = "management",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps = [
+        "@micronaut//:management",
+    ],
+)
+
+micronaut_test(
+    name = "ManagementTest",
+    srcs = ["src/test/java/com/example/management/ManagementTest.java"],
+    runtime_deps = [
+        "@micronaut//:serialization_jackson",
+    ],
+    deps = [
+        ":management",
+        "@micronaut//:http_client",
+        "@micronaut//:management",
+    ],
+)
+
+test_suite(
+    name = "tests",
+    tests = [":ManagementTest"],
+    visibility = ["//features:__pkg__"],
+)

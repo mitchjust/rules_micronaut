@@ -10,6 +10,8 @@
     "com.google.inject:guice": -1023954210,
     "com.google.j2objc:j2objc-annotations": 2003271689,
     "com.h2database:h2": -1982770052,
+    "com.nimbusds:nimbus-jose-jwt": 178314452,
+    "com.rabbitmq:amqp-client": -870461328,
     "dev.langchain4j:langchain4j": 934916315,
     "dev.langchain4j:langchain4j-core": -1015885109,
     "info.picocli:picocli": 114971566,
@@ -55,8 +57,10 @@
     "io.micronaut.picocli:micronaut-picocli": 336627863,
     "io.micronaut.platform:micronaut-platform": -2071255761,
     "io.micronaut.r2dbc:micronaut-r2dbc-core": 2019584509,
+    "io.micronaut.rabbitmq:micronaut-rabbitmq": -986751701,
     "io.micronaut.security:micronaut-security": -1155728217,
     "io.micronaut.security:micronaut-security-annotations": -201976784,
+    "io.micronaut.security:micronaut-security-jwt": -646997395,
     "io.micronaut.security:micronaut-security-processor": -1179194302,
     "io.micronaut.serde:micronaut-serde-api": -1849257820,
     "io.micronaut.serde:micronaut-serde-bson": 348358806,
@@ -88,12 +92,16 @@
     "io.micronaut:micronaut-http": 2129913941,
     "io.micronaut:micronaut-http-client": -1994917063,
     "io.micronaut:micronaut-http-client-core": -705215127,
+    "io.micronaut:micronaut-http-client-jdk": -2040979107,
     "io.micronaut:micronaut-http-server": -51324239,
     "io.micronaut:micronaut-http-server-netty": -1917859706,
     "io.micronaut:micronaut-http-validation": -1827338393,
     "io.micronaut:micronaut-inject": 2102829150,
     "io.micronaut:micronaut-inject-java": 1101677671,
+    "io.micronaut:micronaut-management": -34525936,
     "io.micronaut:micronaut-messaging": -1870208243,
+    "io.micronaut:micronaut-retry": -1250141263,
+    "io.micronaut:micronaut-websocket": -614407600,
     "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations": 292923502,
     "io.opentelemetry:opentelemetry-api": 237530819,
     "io.opentelemetry:opentelemetry-sdk": -314306333,
@@ -129,6 +137,7 @@
     "org.mongodb:bson": 1334374502,
     "org.mongodb:mongodb-driver-sync": -204770457,
     "org.projectlombok:lombok": -2073039513,
+    "org.reactivestreams:reactive-streams": 2047684591,
     "org.slf4j:slf4j-api": 592013003,
     "org.springframework.boot:spring-boot": 1220394855,
     "org.springframework.boot:spring-boot-autoconfigure": 1688286412,
@@ -143,6 +152,7 @@
     "org.testcontainers:testcontainers-kafka": -1796937005,
     "org.testcontainers:testcontainers-mongodb": 1046703263,
     "org.testcontainers:testcontainers-postgresql": 110741309,
+    "org.testcontainers:testcontainers-rabbitmq": 794884647,
     "org.yaml:snakeyaml": 1970926692,
     "repositories": 514854214
   },
@@ -177,10 +187,12 @@
     "com.google.inject:guice": 335411084,
     "com.google.j2objc:j2objc-annotations": -596695707,
     "com.h2database:h2": 947085853,
+    "com.nimbusds:nimbus-jose-jwt": -1763138105,
     "com.ongres.scram:scram-client": -591165191,
     "com.ongres.scram:scram-common": 446934561,
     "com.ongres.stringprep:saslprep": -236169487,
     "com.ongres.stringprep:stringprep": -556652000,
+    "com.rabbitmq:amqp-client": 1276100415,
     "com.sun.istack:istack-commons-runtime": 1703762133,
     "com.vladsch.flexmark:flexmark": 697159249,
     "com.vladsch.flexmark:flexmark-ext-abbreviation": -856886053,
@@ -285,9 +297,11 @@
     "io.micronaut.openapi:micronaut-openapi-common": -1996341341,
     "io.micronaut.picocli:micronaut-picocli": -869515476,
     "io.micronaut.r2dbc:micronaut-r2dbc-core": 510725569,
+    "io.micronaut.rabbitmq:micronaut-rabbitmq": 1454740543,
     "io.micronaut.reactor:micronaut-reactor": 1339135654,
     "io.micronaut.security:micronaut-security": -1468885713,
     "io.micronaut.security:micronaut-security-annotations": 1813799867,
+    "io.micronaut.security:micronaut-security-jwt": -2017931723,
     "io.micronaut.security:micronaut-security-processor": -426173198,
     "io.micronaut.serde:micronaut-serde-api": -125987419,
     "io.micronaut.serde:micronaut-serde-bson": -909610125,
@@ -338,6 +352,7 @@
     "io.micronaut:micronaut-http": -467275022,
     "io.micronaut:micronaut-http-client": -1157999375,
     "io.micronaut:micronaut-http-client-core": 1649801744,
+    "io.micronaut:micronaut-http-client-jdk": 1923678413,
     "io.micronaut:micronaut-http-netty": 1093134967,
     "io.micronaut:micronaut-http-server": -883776954,
     "io.micronaut:micronaut-http-server-netty": -626284351,
@@ -346,6 +361,7 @@
     "io.micronaut:micronaut-inject-java": 353007380,
     "io.micronaut:micronaut-jackson-core": 1342605778,
     "io.micronaut:micronaut-json-core": -1851818956,
+    "io.micronaut:micronaut-management": -1526280917,
     "io.micronaut:micronaut-messaging": -471351423,
     "io.micronaut:micronaut-module-info": 1779289044,
     "io.micronaut:micronaut-retry": -1336207211,
@@ -543,6 +559,7 @@
     "org.testcontainers:testcontainers-mongodb": -1072274279,
     "org.testcontainers:testcontainers-mssqlserver": 2048523721,
     "org.testcontainers:testcontainers-postgresql": -805991591,
+    "org.testcontainers:testcontainers-rabbitmq": 337112276,
     "org.wildfly.client:wildfly-client-config": 1701176345,
     "org.wildfly.common:wildfly-common": -380690923,
     "org.xerial.snappy:snappy-java": 809063461,
@@ -732,6 +749,12 @@
       },
       "version": "2.5.250"
     },
+    "com.nimbusds:nimbus-jose-jwt": {
+      "shasums": {
+        "jar": "33152ea83ec50d22706fdaf3b07acbcd716f9a68edcabdd7c4d02843cbdcdcf6"
+      },
+      "version": "10.9.1"
+    },
     "com.ongres.scram:scram-client": {
       "shasums": {
         "jar": "064d61d87b3346b874cbe56c624d66225e831ece3c758e2bea5013c3cadfe782"
@@ -755,6 +778,12 @@
         "jar": "9009b2d1de40ce398fdb76147f6adab6c2dc37becd0f217dc42411185508f102"
       },
       "version": "2.4"
+    },
+    "com.rabbitmq:amqp-client": {
+      "shasums": {
+        "jar": "407bab4db77453b42b052554934095873db0f1c9b8018aebb97f19eb9f5575fa"
+      },
+      "version": "5.34.0"
     },
     "com.sun.istack:istack-commons-runtime": {
       "shasums": {
@@ -1380,6 +1409,12 @@
       },
       "version": "7.2.0"
     },
+    "io.micronaut.rabbitmq:micronaut-rabbitmq": {
+      "shasums": {
+        "jar": "1358da7ee83f12a94e98cb2ad837ad06e9236da37836621d591b86b74eaeec5d"
+      },
+      "version": "5.1.0"
+    },
     "io.micronaut.reactor:micronaut-reactor": {
       "shasums": {
         "jar": "324f21a1c9e6870686529357226c23f370e7e319367d23b0f160aeb5b1625a85"
@@ -1395,6 +1430,12 @@
     "io.micronaut.security:micronaut-security-annotations": {
       "shasums": {
         "jar": "d5de53210ba4af554407c1331eab51d0ddd4980d781aab67d985d34ce2828cf6"
+      },
+      "version": "5.4.1"
+    },
+    "io.micronaut.security:micronaut-security-jwt": {
+      "shasums": {
+        "jar": "a33d90ad131b459a77a2a0dcca886e9bf428fc2819265fdf5bb29f7c62a0c5b8"
       },
       "version": "5.4.1"
     },
@@ -1698,6 +1739,12 @@
       },
       "version": "5.2.22"
     },
+    "io.micronaut:micronaut-http-client-jdk": {
+      "shasums": {
+        "jar": "d549dd90a68d2adc01b9edf99b2f44e4779eca107df9c5851d6cc7c462c893d7"
+      },
+      "version": "5.2.22"
+    },
     "io.micronaut:micronaut-http-netty": {
       "shasums": {
         "jar": "1dd2c285fc3e5c06be321a47b3882d9cd13ec823b0ab0b3dc23496a9ffd1c327"
@@ -1743,6 +1790,12 @@
     "io.micronaut:micronaut-json-core": {
       "shasums": {
         "jar": "5f293f8c671d2512fbe3175d35ce263cdc58089897ac85f0465798b6acac520b"
+      },
+      "version": "5.2.22"
+    },
+    "io.micronaut:micronaut-management": {
+      "shasums": {
+        "jar": "86b6c998431c58d1f0ba541ab1b65de03ac6ab461c6ea8c1b9004c9a0632dddb"
       },
       "version": "5.2.22"
     },
@@ -2903,6 +2956,12 @@
       },
       "version": "2.0.5"
     },
+    "org.testcontainers:testcontainers-rabbitmq": {
+      "shasums": {
+        "jar": "f2b0707c003a3f9e46cee86754568fc946c1ff39aa55ef522964b79c7bcc0362"
+      },
+      "version": "2.0.5"
+    },
     "org.wildfly.client:wildfly-client-config": {
       "shasums": {
         "jar": "80a4e963ce94ebb043ecb0f2c0e77d327f23dc87d81350b863752eedfa2c3bb3"
@@ -3036,6 +3095,12 @@
       "com.ongres.stringprep:stringprep"
     ],
     "com.ongres.scram:scram-common": ["com.ongres.stringprep:stringprep"],
+    "com.rabbitmq:amqp-client": [
+      "io.netty:netty-codec",
+      "io.netty:netty-handler",
+      "io.netty:netty-transport",
+      "org.slf4j:slf4j-api"
+    ],
     "com.vladsch.flexmark:flexmark": [
       "com.vladsch.flexmark:flexmark-util-ast",
       "com.vladsch.flexmark:flexmark-util-builder",
@@ -3615,6 +3680,15 @@
       "io.r2dbc:r2dbc-pool",
       "io.r2dbc:r2dbc-spi"
     ],
+    "io.micronaut.rabbitmq:micronaut-rabbitmq": [
+      "com.github.ben-manes.caffeine:caffeine",
+      "com.rabbitmq:amqp-client",
+      "io.micronaut:micronaut-inject",
+      "io.micronaut:micronaut-json-core",
+      "io.micronaut:micronaut-messaging",
+      "io.micronaut:micronaut-retry",
+      "io.projectreactor:reactor-core"
+    ],
     "io.micronaut.reactor:micronaut-reactor": [
       "io.micronaut:micronaut-inject",
       "io.projectreactor:reactor-core"
@@ -3629,6 +3703,13 @@
     "io.micronaut.security:micronaut-security-annotations": [
       "io.micronaut:micronaut-aop",
       "io.micronaut:micronaut-inject"
+    ],
+    "io.micronaut.security:micronaut-security-jwt": [
+      "com.nimbusds:nimbus-jose-jwt",
+      "io.micronaut.reactor:micronaut-reactor",
+      "io.micronaut.security:micronaut-security",
+      "io.micronaut:micronaut-inject",
+      "jakarta.validation:jakarta.validation-api"
     ],
     "io.micronaut.security:micronaut-security-processor": [
       "io.micronaut.security:micronaut-security-annotations",
@@ -3940,6 +4021,11 @@
       "io.projectreactor:reactor-core",
       "org.slf4j:slf4j-api"
     ],
+    "io.micronaut:micronaut-http-client-jdk": [
+      "io.micronaut:micronaut-http-client-core",
+      "io.projectreactor:reactor-core",
+      "org.slf4j:slf4j-api"
+    ],
     "io.micronaut:micronaut-http-netty": [
       "io.micronaut:micronaut-buffer-netty",
       "io.micronaut:micronaut-http",
@@ -3989,6 +4075,12 @@
     "io.micronaut:micronaut-json-core": [
       "io.micronaut:micronaut-context",
       "io.micronaut:micronaut-http",
+      "org.slf4j:slf4j-api"
+    ],
+    "io.micronaut:micronaut-management": [
+      "io.micronaut:micronaut-discovery-core",
+      "io.micronaut:micronaut-router",
+      "io.projectreactor:reactor-core",
       "org.slf4j:slf4j-api"
     ],
     "io.micronaut:micronaut-messaging": [
@@ -4680,6 +4772,9 @@
     "org.testcontainers:testcontainers-postgresql": [
       "org.testcontainers:testcontainers-jdbc"
     ],
+    "org.testcontainers:testcontainers-rabbitmq": [
+      "org.testcontainers:testcontainers"
+    ],
     "org.wildfly.client:wildfly-client-config": [
       "org.jboss.logging:jboss-logging"
     ],
@@ -5227,6 +5322,39 @@
       "org.h2.value",
       "org.h2.value.lob"
     ],
+    "com.nimbusds:nimbus-jose-jwt": [
+      "com.nimbusds.jose",
+      "com.nimbusds.jose.crypto",
+      "com.nimbusds.jose.crypto.bc",
+      "com.nimbusds.jose.crypto.factories",
+      "com.nimbusds.jose.crypto.impl",
+      "com.nimbusds.jose.crypto.opts",
+      "com.nimbusds.jose.crypto.utils",
+      "com.nimbusds.jose.jca",
+      "com.nimbusds.jose.jwk",
+      "com.nimbusds.jose.jwk.gen",
+      "com.nimbusds.jose.jwk.source",
+      "com.nimbusds.jose.mint",
+      "com.nimbusds.jose.proc",
+      "com.nimbusds.jose.produce",
+      "com.nimbusds.jose.shaded.gson",
+      "com.nimbusds.jose.shaded.gson.annotations",
+      "com.nimbusds.jose.shaded.gson.internal",
+      "com.nimbusds.jose.shaded.gson.internal.bind",
+      "com.nimbusds.jose.shaded.gson.internal.bind.util",
+      "com.nimbusds.jose.shaded.gson.internal.reflect",
+      "com.nimbusds.jose.shaded.gson.internal.sql",
+      "com.nimbusds.jose.shaded.gson.reflect",
+      "com.nimbusds.jose.shaded.gson.stream",
+      "com.nimbusds.jose.shaded.jcip",
+      "com.nimbusds.jose.util",
+      "com.nimbusds.jose.util.cache",
+      "com.nimbusds.jose.util.events",
+      "com.nimbusds.jose.util.health",
+      "com.nimbusds.jwt",
+      "com.nimbusds.jwt.proc",
+      "com.nimbusds.jwt.util"
+    ],
     "com.ongres.scram:scram-client": ["com.ongres.scram.client"],
     "com.ongres.scram:scram-common": [
       "com.ongres.scram.common",
@@ -5235,6 +5363,17 @@
     ],
     "com.ongres.stringprep:saslprep": ["com.ongres.saslprep"],
     "com.ongres.stringprep:stringprep": ["com.ongres.stringprep"],
+    "com.rabbitmq:amqp-client": [
+      "com.rabbitmq.client",
+      "com.rabbitmq.client.impl",
+      "com.rabbitmq.client.impl.nio",
+      "com.rabbitmq.client.impl.recovery",
+      "com.rabbitmq.client.observation",
+      "com.rabbitmq.client.observation.micrometer",
+      "com.rabbitmq.tools.json",
+      "com.rabbitmq.tools.jsonrpc",
+      "com.rabbitmq.utility"
+    ],
     "com.sun.istack:istack-commons-runtime": [
       "com.sun.istack",
       "com.sun.istack.localization",
@@ -6091,6 +6230,21 @@
       "io.micronaut.r2dbc.health",
       "io.micronaut.r2dbc.info"
     ],
+    "io.micronaut.rabbitmq:micronaut-rabbitmq": [
+      "io.micronaut.rabbitmq.annotation",
+      "io.micronaut.rabbitmq.bind",
+      "io.micronaut.rabbitmq.connect",
+      "io.micronaut.rabbitmq.connect.recovery",
+      "io.micronaut.rabbitmq.event",
+      "io.micronaut.rabbitmq.exception",
+      "io.micronaut.rabbitmq.executor",
+      "io.micronaut.rabbitmq.health",
+      "io.micronaut.rabbitmq.info",
+      "io.micronaut.rabbitmq.intercept",
+      "io.micronaut.rabbitmq.metrics",
+      "io.micronaut.rabbitmq.reactive",
+      "io.micronaut.rabbitmq.serdes"
+    ],
     "io.micronaut.reactor:micronaut-reactor": [
       "io.micronaut.reactor.config",
       "io.micronaut.reactor.convert",
@@ -6134,6 +6288,25 @@
       "io.micronaut.security.annotation",
       "io.micronaut.security.annotation.expressions",
       "io.micronaut.security.info"
+    ],
+    "io.micronaut.security:micronaut-security-jwt": [
+      "io.micronaut.security.info",
+      "io.micronaut.security.token.jwt.config",
+      "io.micronaut.security.token.jwt.converters",
+      "io.micronaut.security.token.jwt.encryption",
+      "io.micronaut.security.token.jwt.encryption.ec",
+      "io.micronaut.security.token.jwt.encryption.rsa",
+      "io.micronaut.security.token.jwt.encryption.secret",
+      "io.micronaut.security.token.jwt.endpoints",
+      "io.micronaut.security.token.jwt.generator",
+      "io.micronaut.security.token.jwt.generator.claims",
+      "io.micronaut.security.token.jwt.nimbus",
+      "io.micronaut.security.token.jwt.signature",
+      "io.micronaut.security.token.jwt.signature.ec",
+      "io.micronaut.security.token.jwt.signature.jwks",
+      "io.micronaut.security.token.jwt.signature.rsa",
+      "io.micronaut.security.token.jwt.signature.secret",
+      "io.micronaut.security.token.jwt.validator"
     ],
     "io.micronaut.security:micronaut-security-processor": [
       "io.micronaut.security.info",
@@ -6586,6 +6759,10 @@
       "io.micronaut.http.client.multipart",
       "io.micronaut.http.client.sse"
     ],
+    "io.micronaut:micronaut-http-client-jdk": [
+      "io.micronaut.http.client.jdk",
+      "io.micronaut.http.client.jdk.cookie"
+    ],
     "io.micronaut:micronaut-http-netty": [
       "io.micronaut.http.netty",
       "io.micronaut.http.netty.body",
@@ -6677,6 +6854,37 @@
       "io.micronaut.json.codec",
       "io.micronaut.json.convert",
       "io.micronaut.json.tree"
+    ],
+    "io.micronaut:micronaut-management": [
+      "io.micronaut.management.endpoint",
+      "io.micronaut.management.endpoint.annotation",
+      "io.micronaut.management.endpoint.beans",
+      "io.micronaut.management.endpoint.beans.impl",
+      "io.micronaut.management.endpoint.env",
+      "io.micronaut.management.endpoint.health",
+      "io.micronaut.management.endpoint.health.filter",
+      "io.micronaut.management.endpoint.info",
+      "io.micronaut.management.endpoint.info.impl",
+      "io.micronaut.management.endpoint.info.source",
+      "io.micronaut.management.endpoint.loggers",
+      "io.micronaut.management.endpoint.loggers.impl",
+      "io.micronaut.management.endpoint.processors",
+      "io.micronaut.management.endpoint.refresh",
+      "io.micronaut.management.endpoint.routes",
+      "io.micronaut.management.endpoint.routes.impl",
+      "io.micronaut.management.endpoint.stop",
+      "io.micronaut.management.endpoint.threads",
+      "io.micronaut.management.endpoint.threads.impl",
+      "io.micronaut.management.health.aggregator",
+      "io.micronaut.management.health.indicator",
+      "io.micronaut.management.health.indicator.annotation",
+      "io.micronaut.management.health.indicator.client",
+      "io.micronaut.management.health.indicator.discovery",
+      "io.micronaut.management.health.indicator.diskspace",
+      "io.micronaut.management.health.indicator.jdbc",
+      "io.micronaut.management.health.indicator.service",
+      "io.micronaut.management.health.indicator.threads",
+      "io.micronaut.management.health.monitor"
     ],
     "io.micronaut:micronaut-messaging": [
       "io.micronaut.messaging",
@@ -9740,6 +9948,10 @@
       "org.testcontainers.containers",
       "org.testcontainers.postgresql"
     ],
+    "org.testcontainers:testcontainers-rabbitmq": [
+      "org.testcontainers.containers",
+      "org.testcontainers.rabbitmq"
+    ],
     "org.wildfly.client:wildfly-client-config": [
       "org.wildfly.client.config",
       "org.wildfly.client.config._private"
@@ -9887,10 +10099,12 @@
       "com.google.inject:guice",
       "com.google.j2objc:j2objc-annotations",
       "com.h2database:h2",
+      "com.nimbusds:nimbus-jose-jwt",
       "com.ongres.scram:scram-client",
       "com.ongres.scram:scram-common",
       "com.ongres.stringprep:saslprep",
       "com.ongres.stringprep:stringprep",
+      "com.rabbitmq:amqp-client",
       "com.sun.istack:istack-commons-runtime",
       "com.vladsch.flexmark:flexmark",
       "com.vladsch.flexmark:flexmark-ext-abbreviation",
@@ -9995,9 +10209,11 @@
       "io.micronaut.openapi:micronaut-openapi-common",
       "io.micronaut.picocli:micronaut-picocli",
       "io.micronaut.r2dbc:micronaut-r2dbc-core",
+      "io.micronaut.rabbitmq:micronaut-rabbitmq",
       "io.micronaut.reactor:micronaut-reactor",
       "io.micronaut.security:micronaut-security",
       "io.micronaut.security:micronaut-security-annotations",
+      "io.micronaut.security:micronaut-security-jwt",
       "io.micronaut.security:micronaut-security-processor",
       "io.micronaut.serde:micronaut-serde-api",
       "io.micronaut.serde:micronaut-serde-bson",
@@ -10048,6 +10264,7 @@
       "io.micronaut:micronaut-http",
       "io.micronaut:micronaut-http-client",
       "io.micronaut:micronaut-http-client-core",
+      "io.micronaut:micronaut-http-client-jdk",
       "io.micronaut:micronaut-http-netty",
       "io.micronaut:micronaut-http-server",
       "io.micronaut:micronaut-http-server-netty",
@@ -10056,6 +10273,7 @@
       "io.micronaut:micronaut-inject-java",
       "io.micronaut:micronaut-jackson-core",
       "io.micronaut:micronaut-json-core",
+      "io.micronaut:micronaut-management",
       "io.micronaut:micronaut-messaging",
       "io.micronaut:micronaut-module-info",
       "io.micronaut:micronaut-retry",
@@ -10253,6 +10471,7 @@
       "org.testcontainers:testcontainers-mongodb",
       "org.testcontainers:testcontainers-mssqlserver",
       "org.testcontainers:testcontainers-postgresql",
+      "org.testcontainers:testcontainers-rabbitmq",
       "org.wildfly.client:wildfly-client-config",
       "org.wildfly.common:wildfly-common",
       "org.xerial.snappy:snappy-java",
@@ -11008,6 +11227,14 @@
     "io.micronaut:micronaut-http-client-core": {
       "io.micronaut.core.convert.TypeConverterRegistrar": [
         "io.micronaut.http.client.loadbalance.LoadBalancerConverters"
+      ]
+    },
+    "io.micronaut:micronaut-http-client-jdk": {
+      "io.micronaut.http.client.HttpClientFactory": [
+        "io.micronaut.http.client.jdk.JdkHttpClientFactory"
+      ],
+      "io.micronaut.http.client.RawHttpClientFactory": [
+        "io.micronaut.http.client.jdk.JdkHttpClientFactory"
       ]
     },
     "io.micronaut:micronaut-http-netty": {

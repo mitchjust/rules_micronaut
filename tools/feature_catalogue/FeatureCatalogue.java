@@ -82,7 +82,8 @@ public class FeatureCatalogue {
                             .artifactId("micronaut-multitenancy-annotations").annotationProcessor().build(),
                     Dependency.builder().groupId("org.slf4j").artifactId("slf4j-api").compile().build()));
     static final Map<String, Set<String>> API_EXCEPTIONS = Map.of(
-            "multi-tenancy", Set.of("org.slf4j:slf4j-api"));
+            "multi-tenancy", Set.of("org.slf4j:slf4j-api"),
+            "rabbitmq", Set.of("org.slf4j:slf4j-api"));
 
     public static void main(String[] args) throws Exception {
         if (args.length == 1 && (args[0].equals("--help") || args[0].equals("-h"))) {

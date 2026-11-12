@@ -15,7 +15,6 @@ micronaut_test(
     # test_class is derived from the name and the src/test/java layout.
     srcs = ["src/test/java/com/example/HelloControllerTest.java"],
     runtime_deps = [
-        "@maven//:io_micronaut_micronaut_http_client",
         "@micronaut//:serialization_jackson",
     ],
     deps = [

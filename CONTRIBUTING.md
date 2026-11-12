@@ -24,8 +24,8 @@ bazel test //...                     # Rule unit tests and API documentation
 ```
 
 The example's tests use an in-memory H2 database, so Docker is not required.
-The smoke suite's Azure Cosmos DB, Kafka, MongoDB and Hibernate Reactive tests use Testcontainers and
-require a running Docker-compatible container runtime.
+The smoke suite's MongoDB, Azure Cosmos DB, Hibernate Reactive, Kafka and RabbitMQ
+tests use Testcontainers and require a running Docker-compatible container runtime.
 
 CI also repeats the smoke suite with `rules_java` forced to the minimum declared
 in the root `MODULE.bazel`. This prevents transitive dependencies from silently
@@ -68,11 +68,13 @@ Keep `bzl_library` targets in sync with `load()` statements; the
 
 Features are defined in [features.bzl](micronaut/private/features.bzl). A
 feature contains its annotation processors, the APIs that consumers compile
-against, and libraries required by generated code. It does not choose
-interchangeable implementations such as connection pools, database drivers,
-cache or logging backends: a dependency embedded in a feature reaches every
-consumer and is hard to remove. Implementation-specific features, such as
-`serialization_jackson`, are separate and opt-in.
+against, and libraries required by generated code. Match Starter catalogue names
+and their behavior where available (with hyphens replaced by underscores):
+`http_client` selects Netty and `http_client_jdk` selects the JDK client.
+Implementation-specific features, such as these clients and
+`serialization_jackson`, are opt-in. General-purpose features leave connection
+pools, database drivers, cache and logging backends to applications: a dependency
+embedded in a feature reaches every consumer and is hard to remove.
 
 Set `generates_api` only when users write the generated type's name in their own
 source, as with SourceGen builders, the JPA metamodel and Jakarta EL expression
