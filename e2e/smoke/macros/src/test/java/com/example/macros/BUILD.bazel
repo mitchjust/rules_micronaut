@@ -12,6 +12,7 @@ micronaut_test(
     jvm_flags = ["-Dmacro.app=$(rlocationpath //macros:inline_app)"],
     runtime = "none",
     runtime_deps = [
+        "//:test_logging",
         "//macros:exported",
         "@micronaut//:core_runtime",
         "@micronaut//:runtime_none",
@@ -50,6 +51,7 @@ micronaut_test(
     runtime = "none",
     test_class = "com.example.macros.MacroTest",
     runtime_deps = _TEST_DEPS + [
+        "//:test_logging",
         "@micronaut//:core_runtime",
         "@micronaut//:runtime_none",
     ],

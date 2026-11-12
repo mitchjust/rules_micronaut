@@ -14,6 +14,7 @@ micronaut_test(
     name = "HibernateMetamodelTest",
     srcs = ["src/test/java/com/example/hibernatejpamodelgen/HibernateMetamodelTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":hibernate-jpamodelgen",
         "@micronaut//:hibernate_jpamodelgen",

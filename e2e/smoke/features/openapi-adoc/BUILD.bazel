@@ -14,6 +14,7 @@ micronaut_test(
     name = "OpenApiAdocTest",
     srcs = ["src/test/java/com/example/openapiadoc/OpenApiAdocTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":openapi-adoc",
         "@micronaut//:openapi_adoc",

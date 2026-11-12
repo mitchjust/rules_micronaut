@@ -12,6 +12,7 @@ micronaut_test(
     name = "SerializationTest",
     srcs = ["src/test/java/com/example/serialization/SerializationTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":serialization",
         "@micronaut//:serialization",

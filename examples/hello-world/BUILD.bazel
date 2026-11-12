@@ -1,3 +1,4 @@
+load("@rules_java//java:java_library.bzl", "java_library")
 load("@rules_micronaut//micronaut:defs.bzl", "micronaut_application", "micronaut_library", "micronaut_test")
 
 micronaut_library(
@@ -29,6 +30,7 @@ micronaut_test(
     name = "BookControllerTest",
     srcs = ["src/test/java/com/example/BookControllerTest.java"],
     runtime_deps = [
+        "//:test_logging",
         "@maven//:com_h2database_h2",
         "@maven//:io_micronaut_sql_micronaut_jdbc_hikari",
         "@maven//:org_yaml_snakeyaml",
@@ -39,5 +41,15 @@ micronaut_test(
         "@micronaut//:data_jpa",
         "@micronaut//:http_client",
         "@micronaut//:serialization",
+    ],
+)
+
+java_library(
+    name = "test_logging",
+    testonly = True,
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        "@maven//:ch_qos_logback_logback_classic",
+        "@rules_micronaut//test_support:logging_config",
     ],
 )

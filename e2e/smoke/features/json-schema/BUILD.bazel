@@ -12,6 +12,7 @@ micronaut_test(
     name = "JsonSchemaTest",
     srcs = ["src/test/java/com/example/jsonschema/JsonSchemaTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":json-schema",
         "@micronaut//:json_schema",

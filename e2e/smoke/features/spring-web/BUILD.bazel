@@ -12,7 +12,10 @@ micronaut_test(
     name = "SpringWebTest",
     srcs = ["src/test/java/com/example/springweb/SpringWebTest.java"],
     runtime = "netty",
-    runtime_deps = ["@micronaut//:serialization_jackson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@micronaut//:serialization_jackson",
+    ],
     deps = [
         ":spring-web",
         "@micronaut//:spring_web",

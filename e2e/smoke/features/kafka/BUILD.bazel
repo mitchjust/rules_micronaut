@@ -11,6 +11,7 @@ micronaut_test(
     srcs = ["src/test/java/com/example/kafka/KafkaTest.java"],
     runtime = "none",
     tags = ["requires-docker"],
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":kafka",
         "@maven//:org_testcontainers_testcontainers",

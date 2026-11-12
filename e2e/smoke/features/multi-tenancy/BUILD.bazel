@@ -10,6 +10,7 @@ micronaut_test(
     name = "MultiTenancyTest",
     srcs = ["src/test/java/com/example/multitenancy/MultiTenancyTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":multi-tenancy",
         "@micronaut//:multi_tenancy",

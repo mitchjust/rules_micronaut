@@ -12,6 +12,7 @@ micronaut_test(
     name = "OpenDiTest",
     srcs = ["src/test/java/com/example/opendi/OpenDiTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":opendi",
         "@micronaut//:opendi",

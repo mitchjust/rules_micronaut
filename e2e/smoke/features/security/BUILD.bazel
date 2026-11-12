@@ -21,6 +21,7 @@ micronaut_test(
     srcs = ["src/test/java/com/example/security/AccountControllerTest.java"],
     # Security's built-in endpoints need a JSON mapper at runtime.
     runtime_deps = [
+        "//:test_logging",
         "@micronaut//:serialization_jackson",
     ],
     deps = [

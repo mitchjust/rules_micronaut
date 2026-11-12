@@ -13,7 +13,10 @@ micronaut_test(
     srcs = ["src/test/java/com/example/serdejsonp/SerdeJsonpTest.java"],
     jvm_flags = ["-Djsonp.provider=org.eclipse.parsson.JsonProviderImpl"],
     runtime = "none",
-    runtime_deps = ["@maven//:org_eclipse_parsson_parsson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@maven//:org_eclipse_parsson_parsson",
+    ],
     deps = [
         ":serialization-jsonp",
         "//features/serialization",
@@ -27,7 +30,10 @@ micronaut_test(
     jvm_flags = ["-Djsonp.provider=org.apache.johnzon.core.JsonProviderImpl"],
     runtime = "none",
     test_class = "com.example.serdejsonp.SerdeJsonpTest",
-    runtime_deps = ["@maven//:org_apache_johnzon_johnzon_core"],
+    runtime_deps = [
+        "//:test_logging",
+        "@maven//:org_apache_johnzon_johnzon_core",
+    ],
     deps = [
         ":serialization-jsonp",
         "//features/serialization",

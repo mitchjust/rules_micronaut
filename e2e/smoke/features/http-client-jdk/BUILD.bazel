@@ -9,7 +9,10 @@ micronaut_library(
 micronaut_test(
     name = "JdkHttpClientTest",
     srcs = ["src/test/java/com/example/httpclientjdk/JdkHttpClientTest.java"],
-    runtime_deps = ["@micronaut//:serialization_jackson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@micronaut//:serialization_jackson",
+    ],
     deps = [
         ":http-client-jdk",
         "@micronaut//:http_client_jdk",

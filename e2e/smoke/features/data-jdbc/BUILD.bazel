@@ -23,6 +23,7 @@ micronaut_test(
     name = "NoPoolTest",
     srcs = ["src/test/java/com/example/data/NoPoolTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         "@micronaut//:data_jdbc",
         "@micronaut//:data_jpa",
@@ -35,6 +36,7 @@ micronaut_test(
     srcs = ["src/test/java/com/example/data/BookRepositoryTest.java"],
     resources = glob(["src/test/resources/**"]),
     runtime_deps = [
+        "//:test_logging",
         "@maven//:com_h2database_h2",
         "@maven//:io_micronaut_sql_micronaut_jdbc_hikari",
         "@maven//:org_yaml_snakeyaml",

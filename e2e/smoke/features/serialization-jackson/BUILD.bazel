@@ -55,7 +55,10 @@ micronaut_test(
     data = [":app"],
     jvm_flags = ["-Dfeatures.serde_app=$(rlocationpath :app)"],
     runtime = "none",
-    runtime_deps = ["@micronaut//:serialization_jackson"],
+    runtime_deps = [
+        "//:test_logging",
+        "@micronaut//:serialization_jackson",
+    ],
     deps = [
         ":manual",
         ":plain",

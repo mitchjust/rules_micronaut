@@ -13,6 +13,7 @@ micronaut_test(
     srcs = ["src/test/java/com/example/datar2dbc/DataR2dbcTest.java"],
     runtime = "none",
     runtime_deps = [
+        "//:test_logging",
         "@maven//:io_r2dbc_r2dbc_h2",
     ],
     deps = [

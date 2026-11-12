@@ -12,6 +12,7 @@ micronaut_test(
     name = "Langchain4jTest",
     srcs = ["src/test/java/com/example/langchain4j/Langchain4jTest.java"],
     runtime = "none",
+    runtime_deps = ["//:test_logging"],
     deps = [
         ":langchain4j",
         "@micronaut//:langchain4j",
