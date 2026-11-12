@@ -8,12 +8,9 @@ module(
 )
 
 bazel_dep(name = "bazel_skylib", version = "1.8.2")
-bazel_dep(name = "contrib_rules_jvm", version = "0.34.0")
+bazel_dep(name = "contrib_rules_jvm", version = "0.35.0")
 bazel_dep(name = "package_metadata", version = "0.0.6")
 bazel_dep(name = "rules_java", version = "8.16.1")
-
-# contrib_rules_jvm's older transitive rules_go cannot load on Bazel 9.
-bazel_dep(name = "rules_go", version = "0.59.0", repo_name = None)
 
 micronaut = use_extension("//micronaut:extensions.bzl", "micronaut")
 use_repo(micronaut, "micronaut")
